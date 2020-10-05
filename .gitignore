@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/Misenchanted Fortress/[Ll]ibrary/
-/Misenchanted Fortress/[Tt]emp/
-/Misenchanted Fortress/[Oo]bj/
-/Misenchanted Fortress/[Bb]uild/
-/Misenchanted Fortress/[Bb]uilds/
-/Misenchanted Fortress/[Ll]ogs/
-/Misenchanted Fortress/[Uu]ser[Ss]ettings/
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
