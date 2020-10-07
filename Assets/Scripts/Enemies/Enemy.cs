@@ -39,6 +39,4 @@ public class Enemy : MonoBehaviour
         if (CurrentHealth > MaxHealth)
             CurrentHealth = MaxHealth;
     }
-
-    
 }
