@@ -10,7 +10,7 @@ public enum TowerType {
 
 public class GameStats : Singleton<GameStats>
 {
-	Dictionary<TowerType, int> Costs = new Dictionary<TowerType, int>();;
+	Dictionary<TowerType, int> Costs = new Dictionary<TowerType, int>();
 	int playerCash = 19;
 	bool hasBeenInitialized = false;
 
