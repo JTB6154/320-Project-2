@@ -33,6 +33,7 @@ public class UnitAssignment : MonoBehaviour
             else
             {
                 //highlight the new unit
+                
             }
 
 
