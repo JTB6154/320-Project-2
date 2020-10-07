@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class FollowPath : MonoBehaviour
 {
-    public PathNode[] path;
+    public PathNode[] Path;
     public float MoveSpeed;
+
+    // Needs to be initialized when instantiated
+    public float DistanceToEnd;
     
     private int currentNode;
     private bool hasReachedLast;
@@ -31,20 +34,24 @@ public class FollowPath : MonoBehaviour
     private void MoveDirectly()
     {
         // Calculate distance and angle to travel
-        Vector3 direction = path[currentNode].transform.position - transform.position;
+        Vector3 direction = Path[currentNode].transform.position - transform.position;
         direction.Normalize();
 
         // "Teleport" the object towards its destination by the movespeed / the time this frame took to process
-        transform.Translate(direction * MoveSpeed * Time.deltaTime);
+        direction = direction * MoveSpeed * Time.deltaTime;
+        transform.Translate(direction);
+
+        // Update the distance to the end node
+        DistanceToEnd -= direction.magnitude;
     }
 
     // Changes the target node if the current node is reached
     private void CheckDistance()
     {
-        if((path[currentNode].transform.position- transform.position).magnitude < 0.01f)
+        if((Path[currentNode].transform.position- transform.position).magnitude < 0.01f)
         {
             // Increase the index of the current node if possible
-            if (currentNode != path.Length - 1)
+            if (currentNode != Path.Length - 1)
                 SetNode(currentNode + 1);
             else
             {
