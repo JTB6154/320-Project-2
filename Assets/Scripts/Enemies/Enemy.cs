@@ -7,15 +7,38 @@ using UnityEngine;
 /// </summary>
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float MaxHealth = 100;
+    public float CurrentHealth;
+    public float Damage = 1;
+    public float AttackSpeed = 0.5f;
+
+    public bool IsRanged = false;
+
+    public void Start()
     {
-        
+        CurrentHealth = MaxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Subtracts a value of damage from the enemy's health
+    /// </summary>
+    /// <param name="deltaHealth">The amount of damage to take</param>
+    public void TakeDamage(float damage)
     {
-        
+        CurrentHealth -= damage;
     }
+
+    /// <summary>
+    /// Adds a value of healing to the enemy's health
+    /// </summary>
+    /// <param name="healing">The amount of healing to add</param>
+    public void HealHealth(float healing)
+    {
+        CurrentHealth += healing;
+
+        if (CurrentHealth > MaxHealth)
+            CurrentHealth = MaxHealth;
+    }
+
+    
 }
