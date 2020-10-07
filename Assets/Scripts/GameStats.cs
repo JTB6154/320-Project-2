@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum TowerType { 
+	None, // For if there should be null
 	Archer,
 	Wizard,
 	Theurgist
@@ -21,6 +22,12 @@ public class GameStats : Singleton<GameStats>
 	public int GetCost(TowerType type)
 	{
 		return Costs[type];
+	}
+
+	public int GetNumTowers()
+    {
+		return System.Enum.GetNames(typeof(TowerType)).Length - 1; 
+
 	}
 
 	/// <summary>
