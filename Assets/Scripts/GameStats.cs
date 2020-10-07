@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
 public enum TowerType { 
@@ -11,17 +12,18 @@ public enum TowerType {
 
 public class GameStats : Singleton<GameStats>
 {
-	Dictionary<TowerType, int> Costs = new Dictionary<TowerType, int>();
+	public Dictionary<TowerType, int> Costs = new Dictionary<TowerType, int>();
 	int playerCash = 19;
 	bool hasBeenInitialized = false;
 
-	public void Initialize()
+	public override void Initialize()
 	{
 		//only initialize if we haven't been before
 		if (hasBeenInitialized) return;
 		//initialize any arrays or dictionaries in the Singleton
 
 		//initialize the costs dictionary
+		Costs[TowerType.None] = 0;
 		Costs[TowerType.Archer] = 10;
 		Costs[TowerType.Wizard] = 10;
 		Costs[TowerType.Theurgist] = 10;
@@ -39,8 +41,12 @@ public class GameStats : Singleton<GameStats>
 	public int GetNumTowers()
     {
 		return System.Enum.GetNames(typeof(TowerType)).Length - 1; 
-
 	}
+
+	public int GetPlayerGold()
+    {
+		return playerCash;
+    }
 
 	/// <summary>
 	/// Returns wether or not you can purchase the tower of given type and if you can removes the gold
