@@ -8,6 +8,7 @@ public class TargettingUnits : MonoBehaviour
     public GameObject objectBeingShot;
     public GameObject arrayHolder;
     public float range;
+    public float damage;
     public bool shooting=false;
     public SpriteRenderer selfRenderer;
     public SpriteRenderer enemySprite;
@@ -62,13 +63,17 @@ public class TargettingUnits : MonoBehaviour
                 
                 //Check if the unit at the top of the queue is in range and alive 
 
-                if(centerDistance<range || x.GetComponent<Enemy>().isActiveAndEnabled) //Change to is alive later
+                if(centerDistance<range || x.GetComponent<Enemy>().CurrentHealth>0) //Change to is alive later
                 {
                     objectBeingShot= x;
                     shooting=true;
                     break;
                 }
             }
+        }
+        if(shooting == true && objectBeingShot!=null)
+        {
+            objectBeingShot.GetComponent<Enemy>().TakeDamage(damage);
         }
     }
 }
