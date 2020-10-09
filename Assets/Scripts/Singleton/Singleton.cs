@@ -51,12 +51,13 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
         {
             instance = this as T;
             DontDestroyOnLoad(gameObject);
+            Initialize();
         }
         else
         {
             Destroy(gameObject);
         }
     }
-
+    public virtual void Initialize() { }
     #endregion
 }
