@@ -12,7 +12,12 @@ public enum TowerType {
 
 public class GameStats : Singleton<GameStats>
 {
-	public Dictionary<TowerType, int> Costs = new Dictionary<TowerType, int>();
+	[SerializeField]
+	private TowerDataPair[] towerDataPairs;
+
+	public Dictionary<TowerType, TowerData> TowerBaseData = new Dictionary<TowerType, TowerData>();
+	int numTotalTowers;
+	//public Dictionary<TowerType, int> Costs = new Dictionary<TowerType, int>();
 	int playerCash = 19;
 	int playerMaxHealth = 100;
 	int playerHealth;
@@ -24,11 +29,12 @@ public class GameStats : Singleton<GameStats>
 		if (hasBeenInitialized) return;
 		//initialize any arrays or dictionaries in the Singleton
 
-		//initialize the costs dictionary
-		Costs[TowerType.None] = 0;
-		Costs[TowerType.Archer] = 10;
-		Costs[TowerType.Wizard] = 10;
-		Costs[TowerType.Theurgist] = 10;
+		// Initialize the BaseData Dict
+		foreach(TowerDataPair tdp in towerDataPairs)
+        {
+			TowerBaseData.Add(tdp.type, tdp.data);
+        }
+		numTotalTowers = towerDataPairs.Length;
 
 		//set player health to the players max health
 		playerHealth = playerMaxHealth;
@@ -40,12 +46,17 @@ public class GameStats : Singleton<GameStats>
 
 	public int GetCost(TowerType type)
 	{
-		return Costs[type];
+		return TowerBaseData[type].Cost;
 	}
+
+	public Sprite GetShopPortrait(TowerType type)
+    {
+		return TowerBaseData[type].ShopPortrait;
+    }
 
 	public int GetNumTowers()
     {
-		return System.Enum.GetNames(typeof(TowerType)).Length - 1; 
+		return numTotalTowers; 
 	}
 
 	public int GetPlayerGold()
@@ -60,13 +71,13 @@ public class GameStats : Singleton<GameStats>
 	/// <returns>returns true if the tower was successfully purchased, and false if it was not</returns>
 	public bool PurchaseItemOfType(TowerType type)
 	{
-		if (Costs[type] > playerCash)
+		if (GetCost(type) > playerCash)
 		{
 			return false;
 		}
 		else
 		{
-			playerCash -= Costs[type];
+			playerCash -= GetCost(type);
 			return true;
 		}
 	}
