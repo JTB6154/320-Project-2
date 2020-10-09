@@ -14,6 +14,8 @@ public class GameStats : Singleton<GameStats>
 {
 	public Dictionary<TowerType, int> Costs = new Dictionary<TowerType, int>();
 	int playerCash = 19;
+	int playerMaxHealth = 100;
+	int playerHealth;
 	bool hasBeenInitialized = false;
 
 	public override void Initialize()
@@ -27,6 +29,9 @@ public class GameStats : Singleton<GameStats>
 		Costs[TowerType.Archer] = 10;
 		Costs[TowerType.Wizard] = 10;
 		Costs[TowerType.Theurgist] = 10;
+
+		//set player health to the players max health
+		playerHealth = playerMaxHealth;
 
 
 		//mark that the class has been initialized
@@ -74,6 +79,18 @@ public class GameStats : Singleton<GameStats>
 	public void AddGold(int amount)
 	{
 		playerCash += amount;
+	}
+
+	public bool SubtractHealth(int amount)
+	{
+		playerHealth -= amount;
+		return (playerHealth >= 0);
+	}
+
+	public void ReInitialize()
+	{
+		hasBeenInitialized = false;
+		Initialize();
 	}
 
 }
