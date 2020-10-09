@@ -1,0 +1,167 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+public enum EnemyType { 
+    none, // To create a break in the spawn wave
+    ranged,
+    melee };
+
+public class EnemySpawnManager : Singleton<EnemySpawnManager>
+{
+    bool hasBeenInitialized = false;
+
+    // The path to the current wave file
+    private string waveInfoFilePath;
+    
+    // The first index of Path is for the spawning node
+    public PathNode[] Path;
+
+    public GameObject ranged;
+    public GameObject melee;
+
+    private float DistanceToEnd;
+
+    private List<string> waveData;
+    private Queue<EnemyType> spawnQueue;
+    private int spawnIndex;
+
+    private bool isActive;
+    private float spawnDelta;
+    private float spawnDeltaRemaining;
+
+    public override void Initialize()
+    {
+        //only initialize if we haven't been before
+        if (hasBeenInitialized) return;
+        //initialize any arrays or dictionaries in the Singleton
+
+        waveData = new List<string>();
+        spawnQueue = new Queue<EnemyType>();
+
+        isActive = false;
+
+        // Calculate distance to the end of the level from the spawn location of enemies
+        DistanceToEnd = 0f;
+
+        for (int i = 0; i < Path.Length - 1; i++)
+        {
+            DistanceToEnd += (Path[i + 1].transform.position - Path[i].transform.position).magnitude;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(isActive)
+        {
+            if (spawnDeltaRemaining <= 0)
+            {
+                SpawnEnemy();
+                spawnDeltaRemaining += spawnDelta;
+            }
+            else
+            {
+                spawnDeltaRemaining -= Time.deltaTime;
+            }
+        }
+        else
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// Changes the file that the wave is 
+    /// </summary>
+    /// <param name="FilePath">File Path of the new .wif file</param>
+    /// <returns>True if successful</returns>
+    public bool ChangeWaveInfoFile(string FilePath)
+    {
+        // Test to see if the file is the right format
+        if(FilePath.Substring(FilePath.Length - 3) != ".wif")
+        {
+            return false;
+        }
+
+        // Test to see if the file exists and has data
+        try
+        {
+            using (StreamReader reader = new StreamReader(FilePath))
+            {
+                string test;
+
+                if ((test = reader.ReadLine()) != null)
+                {
+                    waveInfoFilePath = FilePath;
+                    return true;
+                }
+            }
+                return false;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Starts the Next wave of Enemy Spawns
+    /// </summary>
+    /// <param name="WaveNumber">The wave number of the wave to start</param>
+    public void StartWave(int WaveNumber)
+    {
+        if (WaveNumber < waveData.Count) // Curated Mode
+        {
+            spawnIndex = 0;
+
+            // Clear the spawnQueue
+            spawnQueue.Clear();
+
+            string[] currentWave = waveData[WaveNumber - 1].Split(' ');
+
+            spawnDelta = float.Parse(currentWave[0]);
+            spawnDeltaRemaining = spawnDelta;
+
+            // Populate the spawnQueue
+            for (int i = 1; i < currentWave.Length; i++)
+            {
+                spawnQueue.Enqueue((EnemyType)int.Parse(currentWave[i]));
+            }
+
+        }
+        else // Endless mode
+        {
+            // TODO: Create algorithm for endless mode spawn determination
+        }
+
+        isActive = true;
+    }
+
+    /// <summary>
+    /// Spawns an enemy based off of the next type in the spawnQueue
+    /// </summary>
+    private void SpawnEnemy()
+    {
+        EnemyType enemyType = spawnQueue.Dequeue();
+        GameObject enemy;
+
+        switch (enemyType)
+        {
+            case EnemyType.melee:
+                enemy = Instantiate(melee, Path[0].transform.position, Quaternion.identity);
+                enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
+                enemy.GetComponent<FollowPath>().Path = Path;
+                break;
+            case EnemyType.ranged:
+                enemy = Instantiate(ranged, Path[0].transform.position, Quaternion.identity);
+                enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
+                enemy.GetComponent<FollowPath>().Path = Path;
+                break;
+            case EnemyType.none:
+                break;
+            default:
+                break;
+        }
+    }
+}
