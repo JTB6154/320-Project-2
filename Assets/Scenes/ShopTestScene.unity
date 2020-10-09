@@ -460,6 +460,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bf4b9268dc1b34082179c51f669385, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerDataPairs:
+  - type: 1
+    data: {fileID: 11400000, guid: 9b1a725c42a8dfb4db32ce7e2afbbaaa, type: 2}
+  - type: 2
+    data: {fileID: 11400000, guid: eaae5b67898ee67418f62b942ce824a6, type: 2}
+  - type: 3
+    data: {fileID: 11400000, guid: b4d67187472517c4a996f5b958fc9bd9, type: 2}
 --- !u!4 &923357396
 Transform:
   m_ObjectHideFlags: 0
