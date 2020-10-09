@@ -27,4 +27,19 @@ public class Tower : MonoBehaviour
             return data.Range[Tier - 1];
         }
     }
+
+    public void SetData(TowerData newData)
+    {
+        if (data != null) return;
+
+        data = newData;
+    }
+
+    public void TierUp()
+    {
+        if(Tier < 3)
+        {
+            Tier++;
+        }
+    }
 }

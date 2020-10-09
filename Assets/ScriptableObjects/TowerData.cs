@@ -16,4 +16,6 @@ public class TowerData : ScriptableObject
 
     // Image data and such
     public Sprite ShopPortrait;
+    public Sprite InventorySprite;
+    public Sprite BattlefieldSprite;
 }

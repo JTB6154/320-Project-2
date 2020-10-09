@@ -48,6 +48,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         {
             DistanceToEnd += (Path[i + 1].transform.position - Path[i].transform.position).magnitude;
         }
+
+        hasBeenInitialized = true;
     }
 
     // Update is called once per frame
