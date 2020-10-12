@@ -20,7 +20,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     public GameObject ranged;
     public GameObject melee;
 
-    private float DistanceToEnd;
+    public float DistanceToEnd;
 
     private List<string> waveData;
     private Queue<EnemyType> spawnQueue;
