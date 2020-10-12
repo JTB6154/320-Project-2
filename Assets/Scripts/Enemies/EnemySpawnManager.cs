@@ -62,6 +62,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     // Update is called once per frame
     void Update()
     {
+        // Spawn enemies on spawning
         if(spawnState == SpawnState.spawning)
         {
             if (spawnDeltaRemaining <= 0)

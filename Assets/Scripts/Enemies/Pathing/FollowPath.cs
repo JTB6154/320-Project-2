@@ -14,6 +14,7 @@ public class FollowPath : MonoBehaviour
     private int currentNode;
     private bool hasReachedLast;
 
+    private float attackDeltaRemaining;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +25,23 @@ public class FollowPath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!hasReachedLast)
+        if (!hasReachedLast) // Movement
         {
             MoveDirectly();
             CheckDistance();
+        }
+        else // Attacking
+        {
+            if (attackDeltaRemaining <= 0)
+            {
+                gameObject.GetComponent<Enemy>().Attack();
+                attackDeltaRemaining += gameObject.GetComponent<Enemy>().AttackSpeed;
+            }
+            else
+            {
+                attackDeltaRemaining -= Time.deltaTime;
+            }
+           
         }
     }
 
