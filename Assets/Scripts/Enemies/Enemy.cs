@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 {
     public float MaxHealth = 100;
     public float CurrentHealth;
-    public float Damage = 1;
+    public int Damage = 1;
     public float AttackSpeed = 0.5f;
 
     public bool IsRanged = false;
@@ -39,5 +39,11 @@ public class Enemy : MonoBehaviour
 
         if (CurrentHealth > MaxHealth)
             CurrentHealth = MaxHealth;
+    }
+
+    public void Attack()
+    {
+        GameStats.Instance.SubtractHealth(Damage);
+        // Do animation too
     }
 }
