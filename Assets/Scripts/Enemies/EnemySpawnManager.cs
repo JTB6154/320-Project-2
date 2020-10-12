@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 public enum EnemyType { 
     none, // To create a break in the spawn wave
@@ -24,11 +26,16 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
 
     private List<string> waveData;
     private Queue<EnemyType> spawnQueue;
-    private int spawnIndex;
 
-    private bool isActive;
     private float spawnDelta;
     private float spawnDeltaRemaining;
+
+    private enum SpawnState{
+        paused,
+        spawning
+    };
+
+    private SpawnState spawnState;
 
     public override void Initialize()
     {
@@ -39,7 +46,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         waveData = new List<string>();
         spawnQueue = new Queue<EnemyType>();
 
-        isActive = false;
+        spawnState = SpawnState.paused;
 
         // Calculate distance to the end of the level from the spawn location of enemies
         DistanceToEnd = 0f;
@@ -55,7 +62,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     // Update is called once per frame
     void Update()
     {
-        if(isActive)
+        if(spawnState == SpawnState.spawning)
         {
             if (spawnDeltaRemaining <= 0)
             {
@@ -81,8 +88,9 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     public bool ChangeWaveInfoFile(string FilePath)
     {
         // Test to see if the file is the right format
-        if(FilePath.Substring(FilePath.Length - 3) != ".wif")
+        if(FilePath.Substring(FilePath.Length - 4) != ".wif")
         {
+            //print("not suitable file structure");
             return false;
         }
 
@@ -95,7 +103,13 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
 
                 if ((test = reader.ReadLine()) != null)
                 {
+                    print(test);
                     waveInfoFilePath = FilePath;
+                    waveData.Clear();
+                    waveData.Add(test);
+
+                    waveData.AddRange(reader.ReadToEnd().Split('\n'));
+
                     return true;
                 }
             }
@@ -113,10 +127,12 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     /// <param name="WaveNumber">The wave number of the wave to start</param>
     public void StartWave(int WaveNumber)
     {
+        // Don't let 2 waves spawn at the same time
+        if (spawnState == SpawnState.spawning)
+            return;
+
         if (WaveNumber < waveData.Count) // Curated Mode
         {
-            spawnIndex = 0;
-
             // Clear the spawnQueue
             spawnQueue.Clear();
 
@@ -124,6 +140,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
 
             spawnDelta = float.Parse(currentWave[0]);
             spawnDeltaRemaining = spawnDelta;
+
+            print(spawnDelta);
 
             // Populate the spawnQueue
             for (int i = 1; i < currentWave.Length; i++)
@@ -137,7 +155,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
             // TODO: Create algorithm for endless mode spawn determination
         }
 
-        isActive = true;
+        spawnState = SpawnState.spawning;
     }
 
     /// <summary>
@@ -145,6 +163,13 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     /// </summary>
     private void SpawnEnemy()
     {
+        // Break once the spawn queue is empty
+        if(spawnQueue.Count == 0)
+        {
+            spawnState = SpawnState.paused;
+            return;
+        }
+
         EnemyType enemyType = spawnQueue.Dequeue();
         GameObject enemy;
 

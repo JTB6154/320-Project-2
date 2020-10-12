@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public void Start()
     {
         CurrentHealth = MaxHealth;
+        gameObject.GetComponent<FollowPath>().IsRanged = IsRanged;
     }
 
     /// <summary>
