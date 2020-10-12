@@ -7,5 +7,5 @@ using UnityEngine;
 public class TowerDataPair
 {
     public TowerType type;
-    public TowerData data;
+    public TroopData data;
 }
