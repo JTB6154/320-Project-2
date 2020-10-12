@@ -15,7 +15,7 @@ public class GameStats : Singleton<GameStats>
 	[SerializeField]
 	private TowerDataPair[] towerDataPairs;
 
-	public Dictionary<TowerType, TowerData> TowerBaseData = new Dictionary<TowerType, TowerData>();
+	public Dictionary<TowerType, TroopData> TowerBaseData = new Dictionary<TowerType, TroopData>();
 	int numTotalTowers;
 	//public Dictionary<TowerType, int> Costs = new Dictionary<TowerType, int>();
 	int playerCash = 19;

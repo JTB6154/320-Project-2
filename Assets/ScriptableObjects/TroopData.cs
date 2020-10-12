@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Tower", menuName = "New Tower")]
-public class TowerData : ScriptableObject
+[CreateAssetMenu(fileName = "New Troop", menuName = "New Troop")]
+public class TroopData : ScriptableObject
 {
     // Name
-    public string TowerName;
+    public string TroopName;
 
     // Combat Stats
     public int Cost;

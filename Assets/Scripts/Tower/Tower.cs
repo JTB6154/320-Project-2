@@ -5,9 +5,8 @@ using System.Linq;
 
 public class Tower : MonoBehaviour
 {
-    TowerData data;
+    TroopPlaceholder troop;
     public bool isUnitAssigned;
-    public int Tier = 1;
     public GameObject gameManager;
     public float timer = 0.0f;
     public float waitTime = 0.0f;
@@ -26,7 +25,7 @@ public class Tower : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        waitTime = 1000 / AttackSpeed;
+        waitTime = 1000 / troop.AttackSpeed;
         if (timer > waitTime)
         {
             timer -= waitTime;
@@ -34,47 +33,10 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public float AttackSpeed
-    {
-        get
-        {
-            return data.AttackSpeed[Tier - 1];
-        }
-    }
-    public float Damage
-    {
-        get
-        {
-            return data.Damage[Tier - 1];
-        }
-    }
-    public float Range
-    {
-        get
-        {
-            return data.Range[Tier - 1];
-        }
-    }
-
-    public void SetData(TowerData newData)
-    {
-        if (data != null) return;
-
-        data = newData;
-    }
-
-    public void TierUp()
-    {
-        if(Tier < 3)
-        {
-            Tier++;
-        }
-    }
-
     public void AssignUnit(GameObject gameObject)
     {
         isUnitAssigned = true;
-        SetData(gameObject.GetComponent<TroopPlaceholder>().data);
+        troop = gameObject.GetComponent<TroopPlaceholder>();
     }
 
     public void FindAndShootTarget()
@@ -89,7 +51,7 @@ public class Tower : MonoBehaviour
             enemySprite = target.GetComponent<SpriteRenderer>();
             float centerDistance = Mathf.Pow(Mathf.Pow(enemySprite.bounds.center.x - selfRenderer.bounds.center.x, 2f) +
                 Mathf.Pow(enemySprite.bounds.center.y - selfRenderer.bounds.center.y, 2f), 0.5f);
-            if (centerDistance < this.Range && target.GetComponent<Enemy>().CurrentHealth > 0)
+            if (centerDistance < troop.Range && target.GetComponent<Enemy>().CurrentHealth > 0)
             {
 
             }
@@ -101,7 +63,7 @@ public class Tower : MonoBehaviour
                     enemySprite = x.GetComponent<SpriteRenderer>();
                     float newCenterDistance = Mathf.Pow(Mathf.Pow(enemySprite.bounds.center.x - selfRenderer.bounds.center.x, 2f) +
                         Mathf.Pow(enemySprite.bounds.center.y - selfRenderer.bounds.center.y, 2f), 0.5f);
-                    if (newCenterDistance < this.Range && x.GetComponent<Enemy>().CurrentHealth>0) //Change to is alive later
+                    if (newCenterDistance < troop.Range && x.GetComponent<Enemy>().CurrentHealth>0) //Change to is alive later
                     {
                         target = x;
                         shooting = true;
@@ -123,7 +85,7 @@ public class Tower : MonoBehaviour
 
                 //Check if the unit at the top of the queue is in range and alive 
 
-                if (centerDistance < this.Range && x.GetComponent<Enemy>().CurrentHealth > 0) //Change to is alive later
+                if (centerDistance < troop.Range && x.GetComponent<Enemy>().CurrentHealth > 0) //Change to is alive later
                 {
                     target = x;
                     shooting = true;
@@ -133,7 +95,7 @@ public class Tower : MonoBehaviour
         }
         if (shooting == true && target != null)
         {
-            target.GetComponent<Enemy>().TakeDamage(this.Damage);
+            target.GetComponent<Enemy>().TakeDamage(troop.Damage);
         }
     }
 }
