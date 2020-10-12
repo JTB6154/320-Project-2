@@ -64,7 +64,8 @@ public class UnitAssignment : MonoBehaviour
         public TroopPlaceholder PopHighlightedTroop()
         {
             TroopPlaceholder temp = inventory[highlightedIndex];
-            inventory[highlightedIndex] = emptyInvItem;
+            inventory.RemoveAt(highlightedIndex);
+            inventory.Add(emptyInvItem);
             return temp;
         }
 	#endregion
