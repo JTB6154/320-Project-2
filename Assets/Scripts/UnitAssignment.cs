@@ -14,6 +14,8 @@ public class UnitAssignment : MonoBehaviour
         TroopPlaceholder emptyInvItem = new TroopPlaceholder();
         //data of an empty unit
         [SerializeField] TroopData EmptyInvItem;
+    [SerializeField] int maxInventorySize;
+        int itemCount = 0;
     [Space]
     [Header("Input")]
         [SerializeField] GameObject buttonParent;//the parent of all of the buttons that make up the inventory
@@ -30,6 +32,7 @@ public class UnitAssignment : MonoBehaviour
             emptyInvItem.SetData(EmptyInvItem);
             highlightedIndex = -1;
             buttons = buttonParent.GetComponentsInChildren<Button>();
+            //maxInventorySize = buttons.Length;
             for (int i = 0; i < buttons.Length; i++)
             {
                 inventory.Add(emptyInvItem);
@@ -61,12 +64,41 @@ public class UnitAssignment : MonoBehaviour
             outputLabel.text = inventory[itemIndex].ToString();
         }
 
+        /// <summary>
+        /// pops the highlighted troop out
+        /// </summary>
+        /// <returns>the troop highlighted, if no troop is highlighted returns null</returns>
         public TroopPlaceholder PopHighlightedTroop()
         {
-            TroopPlaceholder temp = inventory[highlightedIndex];
-            inventory.RemoveAt(highlightedIndex);
-            inventory.Add(emptyInvItem);
-            return temp;
+            if (highlightedIndex != -1)
+            {
+                TroopPlaceholder temp = inventory[highlightedIndex];
+                inventory.RemoveAt(highlightedIndex);
+                inventory.Add(emptyInvItem);
+                itemCount -= 1;
+                outputLabel.text = "";
+                highlightedIndex = -1;
+                return temp;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Takes in a troop to be added to the inventory
+        /// </summary>
+        /// <param name="troop">The troop that is sent to the inventory</param>
+        /// <returns>if the troop could be added to the inventory</returns>
+        public bool AddTroop(TroopPlaceholder troop)
+        {
+            if (itemCount + 1 > maxInventorySize)
+            {
+                return false;
+            }
+
+            itemCount++;
+            inventory[itemCount] = troop;
+            return true;
         }
 	#endregion
 
