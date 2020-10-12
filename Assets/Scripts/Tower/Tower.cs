@@ -35,6 +35,7 @@ public class Tower : MonoBehaviour
 
     public void AssignUnit(GameObject gameObject)
     {
+        if (isUnitAssigned) return;
         isUnitAssigned = true;
         troop = gameObject.GetComponent<TroopPlaceholder>();
     }
