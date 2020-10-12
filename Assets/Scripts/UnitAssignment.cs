@@ -60,7 +60,7 @@ public class UnitAssignment : MonoBehaviour
             //get some data about the inventory items
             highlightedIndex = itemIndex;
 
-            //send it to a lable of some sort
+            //send it to a label of some sort
             outputLabel.text = inventory[itemIndex].ToString();
         }
 
@@ -96,8 +96,8 @@ public class UnitAssignment : MonoBehaviour
                 return false;
             }
 
-            itemCount++;
             inventory[itemCount] = troop;
+            itemCount++;
             return true;
         }
 	#endregion

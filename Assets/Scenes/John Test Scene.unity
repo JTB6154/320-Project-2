@@ -392,6 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EmptyInvItem: {fileID: 11400000, guid: 529f478346abcae47aad52ff12643609, type: 2}
+  maxInventorySize: 3
   buttonParent: {fileID: 1835407456}
   outputLabel: {fileID: 641956493}
 --- !u!1 &1470782666
