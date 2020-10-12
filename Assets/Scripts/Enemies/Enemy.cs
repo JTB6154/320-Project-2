@@ -41,6 +41,9 @@ public class Enemy : MonoBehaviour
             CurrentHealth = MaxHealth;
     }
 
+    /// <summary>
+    /// Attacks the player health
+    /// </summary>
     public void Attack()
     {
         GameStats.Instance.SubtractHealth(Damage);
