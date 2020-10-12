@@ -9,6 +9,7 @@ public class FollowPath : MonoBehaviour
 
     // Needs to be initialized when instantiated
     public float DistanceToEnd;
+    public bool IsRanged;
     
     private int currentNode;
     private bool hasReachedLast;
@@ -48,7 +49,22 @@ public class FollowPath : MonoBehaviour
     // Changes the target node if the current node is reached
     private void CheckDistance()
     {
-        if((Path[currentNode].transform.position- transform.position).magnitude < 0.01f)
+        if (IsRanged)
+        {
+            if (currentNode == Path.Length - 1)
+            {
+                if ((Path[currentNode].transform.position - transform.position).magnitude < 0.5f)
+                {
+                    hasReachedLast = true;
+                }
+            }
+            else if ((Path[currentNode].transform.position - transform.position).magnitude < 0.01f && currentNode != Path.Length - 1)
+            {
+                // Increase the index of the current node if possible
+                SetNode(currentNode + 1);
+            }
+        }
+        else if ((Path[currentNode].transform.position - transform.position).magnitude < 0.01f)
         {
             // Increase the index of the current node if possible
             if (currentNode != Path.Length - 1)

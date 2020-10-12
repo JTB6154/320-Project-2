@@ -21,26 +21,22 @@ public class SpawnEnemiesTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Calculate distance to the end of the level from the spawn location of enemies
-        DistanceToEnd = 0f;
-
-        for (int i = 0; i < Path.Length - 1; i++)
-        {
-            DistanceToEnd += (Path[i + 1].transform.position - Path[i].transform.position).magnitude;
-        }
+        EnemySpawnManager.Instance.Initialize();
+        print(EnemySpawnManager.Instance.ChangeWaveInfoFile("C:/Users/Jack/Documents/GitHub/320-Project-2/Assets/Scripts/TestingSpawnFile.wif"));
+            EnemySpawnManager.Instance.StartWave(1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Timer to spawn an enemy every 10 seconds
+        /*// Timer to spawn an enemy every 10 seconds
         timeLeft -= Time.deltaTime;
 
         if(timeLeft <= 0f)
         {
             SpawnEnemy((EnemyType)Random.Range(0, 2));
             timeLeft = timeToSpawn;
-        }
+        }*/
     }
 
     /// <summary>

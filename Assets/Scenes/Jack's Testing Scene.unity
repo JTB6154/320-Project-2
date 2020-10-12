@@ -374,6 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 752326308}
   - component: {fileID: 752326307}
+  - component: {fileID: 752326309}
   m_Layer: 0
   m_Name: PathManager
   m_TagString: Untagged
@@ -421,6 +422,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &752326309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752326306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085e51b98321d2a4c8e1ac3493c84bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path:
+  - {fileID: 5971568573891633921}
+  - {fileID: 635720392}
+  - {fileID: 1610315376}
+  - {fileID: 6836735}
+  - {fileID: 1097985855}
+  - {fileID: 1382254442}
+  - {fileID: 249090639}
+  - {fileID: 1887494709}
+  - {fileID: 1971262499}
+  - {fileID: 2146180462}
+  - {fileID: 1307632532}
+  ranged: {fileID: 432611882971593928, guid: 354dda6ffa27a9840a2e4855c3233696, type: 3}
+  melee: {fileID: 5345080419712204314, guid: f041dc18630030f41b43e8dd350fe505, type: 3}
+  DistanceToEnd: 0
 --- !u!1001 &1097985854
 PrefabInstance:
   m_ObjectHideFlags: 0
