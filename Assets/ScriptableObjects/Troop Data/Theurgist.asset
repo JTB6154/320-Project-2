@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6401c8892d05842aaf112a3a30526f, type: 3}
   m_Name: Theurgist
   m_EditorClassIdentifier: 
-  TowerName: Theurgist
+  TroopName: 
   Cost: 10
   AttackSpeed:
   - 2
@@ -26,4 +26,7 @@ MonoBehaviour:
   - 100
   - 100
   - 100
+  TowerType: 3
   ShopPortrait: {fileID: 21300000, guid: 4895fcf8b18abb8489adb8381a276b4e, type: 3}
+  InventorySprite: {fileID: 21300000, guid: 4895fcf8b18abb8489adb8381a276b4e, type: 3}
+  BattlefieldSprite: {fileID: 0}

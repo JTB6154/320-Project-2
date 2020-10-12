@@ -7,51 +7,66 @@ public class UnitAssignment : MonoBehaviour
 {
 
     #region Fields
-    //list of active towers
-    //inventory of units
-    List<TowerData> inventory = new List<TowerData>();
-    [SerializeField] TowerData inv1Test;
-    [SerializeField] TowerData emptyInvItem;
-    [SerializeField] GameObject buttonParent;
-    [SerializeField] Text outputLabel;
-    int highlightedIndex;
-    Button[] buttons;
-    //reference to currently highlighted unit
-    bool unitHighlighted;
+    [Header("Troop Data")]
+        //inventory of units
+        List<TroopPlaceholder> inventory = new List<TroopPlaceholder>();
+        //troop empty units
+        TroopPlaceholder emptyInvItem = new TroopPlaceholder();
+        //data of an empty unit
+        [SerializeField] TroopData EmptyInvItem;
+    [Space]
+    [Header("Input")]
+        [SerializeField] GameObject buttonParent;//the parent of all of the buttons that make up the inventory
+        Button[] buttons;
+    [Space]
+    [Header("Output")]
+        [SerializeField] Text outputLabel;
+        int highlightedIndex;
 	#endregion
 
-	void Start()
-    {
-        highlightedIndex = -1;
-        buttons = buttonParent.GetComponentsInChildren<Button>();
-        inventory.Add(inv1Test);
-        for (int i = 1; i < buttons.Length; i++)
+	#region UnityFunctions
+	    void Start()
         {
-            inventory.Add(emptyInvItem);
-        }
-    }
-
-    void Update()
-    {
-        //Debug.Log(buttons);
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            Debug.Log(buttons[i].name);
-            buttons[i].enabled =  inventory[i].TowerType != TowerType.None;
-            buttons[i].GetComponent<Image>().sprite = inventory[i].InventorySprite;
+            emptyInvItem.SetData(EmptyInvItem);
+            highlightedIndex = -1;
+            buttons = buttonParent.GetComponentsInChildren<Button>();
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                inventory.Add(emptyInvItem);
+            }
         }
 
-    }
+        void Update()
+        {
+            //Debug.Log(buttons);
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                Debug.Log(buttons[i].name);
+                buttons[i].enabled = inventory[i].data.TowerType != TowerType.None;
+                buttons[i].GetComponent<Image>().sprite = inventory[i].PortraitSprite;
+            }
 
-    //we'll give the buttons this function and the proper index
-    public void displayInventoryItem(int itemIndex)
-    {
-        //get some data about the inventory items
-        highlightedIndex = itemIndex;
-        
-        //send it to a lable of some sort
-        outputLabel.text = inventory[itemIndex].ToString();
-    }
+        }
+	#endregion
 
+	#region Public Functions
+
+	    //we'll give the buttons this function and the proper index
+	    public void DisplayInventoryItem(int itemIndex)
+        {
+            //get some data about the inventory items
+            highlightedIndex = itemIndex;
+
+            //send it to a lable of some sort
+            outputLabel.text = inventory[itemIndex].ToString();
+        }
+
+        public TroopPlaceholder PopHighlightedTroop()
+        {
+            TroopPlaceholder temp = inventory[highlightedIndex];
+            inventory[highlightedIndex] = emptyInvItem;
+            return temp;
+        }
+	#endregion
 
 }

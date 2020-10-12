@@ -22,6 +22,6 @@ public class TroopData : ScriptableObject
 
     public override string ToString()
     {
-        return "Name: " + TowerName + " Cost: " + Cost + " Range: " + Range + " Damage: " + Damage; 
+        return "Name: " + TroopName + " Cost: " + Cost + " Range: " + Range + " Damage: " + Damage; 
     }
 }

@@ -6,10 +6,6 @@ public class TroopPlaceholder : MonoBehaviour
 {
     public int tier = 1;
     public TroopData data;
-    void Start()
-    {
-    }
-
     public float AttackSpeed
     {
         get
@@ -46,6 +42,15 @@ public class TroopPlaceholder : MonoBehaviour
             return data.ShopPortrait;
         }
     }
+
+    public Sprite InventorySprite
+    {
+        get
+        {
+            return data.InventorySprite;
+        }
+    }
+
     public void SetData(TroopData newData)
     {
         if (data != null) return;
@@ -58,5 +63,10 @@ public class TroopPlaceholder : MonoBehaviour
         {
             tier++;
         }
+    }
+
+    public override string ToString()
+    {
+        return data.ToString();
     }
 }
