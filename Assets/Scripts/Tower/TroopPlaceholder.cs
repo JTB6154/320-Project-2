@@ -4,25 +4,59 @@ using UnityEngine;
 
 public class TroopPlaceholder : MonoBehaviour
 {
-    public int tier;
-    public Sprite sprite;
-    public TowerData data;
-    public float[] attackSpeed;
-    public int cost;
-    public float[] damage;
-    // Start is called before the first frame update
+    public int tier = 1;
+    public TroopData data;
     void Start()
     {
-        data = new TowerData();
-        data.BattlefieldSprite = this.sprite;
-        data.AttackSpeed = this.attackSpeed;
-        data.Cost = this.cost;
-        data.Damage = this.damage;
     }
 
-    // Update is called once per frame
-    void Update()
+    public float AttackSpeed
     {
-        
+        get
+        {
+            return data.AttackSpeed[tier - 1];
+        }
+    }
+    public float Damage
+    {
+        get
+        {
+            return data.Damage[tier - 1];
+        }
+    }
+    public float Range
+    {
+        get
+        {
+            return data.Range[tier - 1];
+        }
+    }
+    public int Cost
+    {
+        get
+        {
+            return data.Cost;
+        }
+    }
+
+    public Sprite PortraitSprite
+    {
+        get
+        {
+            return data.ShopPortrait;
+        }
+    }
+    public void SetData(TroopData newData)
+    {
+        if (data != null) return;
+
+        data = newData;
+    }
+    public void TierUp()
+    {
+        if (tier < 3)
+        {
+            tier++;
+        }
     }
 }
