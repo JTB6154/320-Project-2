@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6401c8892d05842aaf112a3a30526f, type: 3}
   m_Name: Theurgist
   m_EditorClassIdentifier: 
-  TroopName: 
+  TroopName: Theurgist
+  Description: 'ORA ORA ORA ORA ORA ORA ORA ORA ORA ORA ORA '
   Cost: 10
   AttackSpeed:
   - 2

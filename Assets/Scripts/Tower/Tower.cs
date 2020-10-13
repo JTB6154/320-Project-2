@@ -33,10 +33,10 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public void AssignUnit(GameObject gameObject)
+    public void AssignUnit(TroopPlaceholder troop)
     {
         isUnitAssigned = true;
-        troop = gameObject.GetComponent<TroopPlaceholder>();
+        this.troop = troop;
     }
 
     public void FindAndShootTarget()

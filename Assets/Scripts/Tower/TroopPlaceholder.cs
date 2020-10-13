@@ -2,10 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TroopPlaceholder : MonoBehaviour
+public class TroopPlaceholder
 {
     public int tier = 1;
     public TroopData data;
+
+    public TroopPlaceholder(TroopData data)
+    {
+        this.data = data;
+    }
+
+    public string TroopName
+    {
+        get
+        {
+            return data.TroopName;
+        }
+    }
+    public string Description
+    {
+        get
+        {
+            return data.Description;
+        }
+    }
     public float AttackSpeed
     {
         get

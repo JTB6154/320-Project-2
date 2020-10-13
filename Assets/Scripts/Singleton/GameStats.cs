@@ -15,10 +15,10 @@ public class GameStats : Singleton<GameStats>
 	[SerializeField]
 	private TowerDataPair[] towerDataPairs;
 
-	public Dictionary<TowerType, TroopData> TowerBaseData = new Dictionary<TowerType, TroopData>();
+	public Dictionary<TowerType, TroopData> TroopBaseData = new Dictionary<TowerType, TroopData>();
 	int numTotalTowers;
 	//public Dictionary<TowerType, int> Costs = new Dictionary<TowerType, int>();
-	int playerCash = 19;
+	int playerCash = 100;
 	int playerMaxHealth = 100;
 	int playerHealth;
 	bool hasBeenInitialized = false;
@@ -32,7 +32,7 @@ public class GameStats : Singleton<GameStats>
 		// Initialize the BaseData Dict
 		foreach(TowerDataPair tdp in towerDataPairs)
         {
-			TowerBaseData.Add(tdp.type, tdp.data);
+			TroopBaseData.Add(tdp.type, tdp.data);
         }
 		numTotalTowers = towerDataPairs.Length;
 
@@ -46,12 +46,12 @@ public class GameStats : Singleton<GameStats>
 
 	public int GetCost(TowerType type)
 	{
-		return TowerBaseData[type].Cost;
+		return TroopBaseData[type].Cost;
 	}
 
 	public Sprite GetShopPortrait(TowerType type)
     {
-		return TowerBaseData[type].ShopPortrait;
+		return TroopBaseData[type].ShopPortrait;
     }
 
 	public int GetNumTowers()

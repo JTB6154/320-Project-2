@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Shop : Singleton<Shop>
+public class Shop : MonoBehaviour
 {
+    public Inventory unitAssignment;
+    public UIManager uiManager;
     public TowerType[] currentShop;
 
     public void Start()
@@ -25,28 +28,40 @@ public class Shop : Singleton<Shop>
             TowerType newTower = (TowerType)Random.Range(1, numTowers + 1);
             currentShop[i] = newTower;
             // Enable all the buttons
-            UIManager.Instance.towerButtons[i].SetActive(true);
+            uiManager.towerButtons[i].SetActive(true);
         }
 
-        UIManager.Instance.UpdateShopUI();
+        uiManager.UpdateShopUI(this);
     }
 
     // Will try to purchase a unit from the shop at the index given
-    public bool BuyTower(int index)
+    public void BuyTower(int index)
     {
-        if(currentShop[index] == TowerType.None)
+        if (currentShop[index] == TowerType.None)
         {
-            return false;
+            return;// false;
         }
-        if(GameStats.Instance.PurchaseItemOfType(currentShop[index]))
+        if (!unitAssignment.IsInventoryFull())
         {
-            currentShop[index] = TowerType.None;
-            UIManager.Instance.towerButtons[index].SetActive(false);
-            return true;
+            if (GameStats.Instance.PurchaseItemOfType(currentShop[index]))
+            {
+                // * add it to the inventory *
+                TroopPlaceholder newTroop = new TroopPlaceholder(GameStats.Instance.TroopBaseData[currentShop[index]]);
+                unitAssignment.AddTroop(newTroop);
+
+                currentShop[index] = TowerType.None;
+                uiManager.towerButtons[index].SetActive(false);
+                //return true;
+            }
         }
-        else
-        {
-            return false;
-        }
+
+    }
+
+    public void UpdateInfoWindow(int index)
+    {
+        TroopData data = GameStats.Instance.TroopBaseData[currentShop[index]];
+        Debug.Log(data.TroopName);
+        InfoWindow.UpdateInfoStatic(data);
+        
     }
 }
