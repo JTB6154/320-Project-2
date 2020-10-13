@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI goldText;
     public GameObject[] towerButtons;
@@ -14,7 +14,7 @@ public class UIManager : Singleton<UIManager>
     // Start is called before the first frame update
     void Start()
     {
-        UpdateShopUI();
+        //UpdateShopUI();
     }
 
     // Update is called once per frame
@@ -23,12 +23,12 @@ public class UIManager : Singleton<UIManager>
         goldText.text = GameStats.Instance.GetPlayerGold().ToString();
     }
 
-    public void UpdateShopUI()
+    public void UpdateShopUI(Shop shop)
     {
         foreach(GameObject go in towerButtons)
         {
             ShopItem shopItemInfo = go.GetComponentInChildren<ShopItem>();
-            TowerType currentTowerType = Shop.Instance.currentShop[shopItemInfo.index];
+            TowerType currentTowerType = shop.currentShop[shopItemInfo.index];
             shopItemInfo.costText.text = GameStats.Instance.GetCost(currentTowerType).ToString();
             shopItemInfo.nameText.text = currentTowerType.ToString();
             shopItemInfo.towerImage.sprite = GameStats.Instance.GetShopPortrait(currentTowerType);

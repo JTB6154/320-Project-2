@@ -10,9 +10,4 @@ public class ShopItem : MonoBehaviour
     public Image towerImage;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI costText;
-
-    public void BuyItem()
-    {
-        Shop.Instance.BuyTower(index);
-    }
 }

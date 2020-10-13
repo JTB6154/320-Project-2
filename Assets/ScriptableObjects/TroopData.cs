@@ -7,6 +7,8 @@ public class TroopData : ScriptableObject
 {
     // Name
     public string TroopName;
+    [TextArea(3, 7)]
+    public string Description;
 
     // Combat Stats
     public int Cost;
@@ -22,6 +24,6 @@ public class TroopData : ScriptableObject
 
     public override string ToString()
     {
-        return "Name: " + TroopName + " Cost: " + Cost + " Range: " + Range + " Damage: " + Damage; 
+        return "Name: " + TroopName + " Cost: " + Cost + " Range: " + Range[0] + " Damage: " + Damage[0]; 
     }
 }
