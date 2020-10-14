@@ -115,6 +115,8 @@ public class Inventory : MonoBehaviour
         inventory[index] = null;
         GameObject.Destroy(buttons[index]);
         buttons[index] = null;
+        // Just clear the highlighted unit, just to be safe
+        SetHighlightedUnit(-1);
         return toReturn;
     }
 
