@@ -60,7 +60,7 @@ public class Inventory : MonoBehaviour
     {
         highlightedIndex = itemIndex;
 
-    }
+    } 
 
     /// <summary>
     /// Removes and returns a troop at the given index
