@@ -7,7 +7,7 @@ public class Tower : MonoBehaviour
 {
     TroopPlaceholder troop;
     public bool isUnitAssigned;
-    public GameObject gameManager;
+    public QueueHolder enemyQueue;
     public float timer = 0.0f;
     public float waitTime = 0.0f;
 
@@ -24,6 +24,8 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
+        if (troop == null) return;
+
         timer += Time.deltaTime;
         waitTime = 1000 / troop.AttackSpeed;
         if (timer > waitTime)
@@ -43,7 +45,7 @@ public class Tower : MonoBehaviour
     public void FindAndShootTarget()
     {
         //Update queue every frame 
-        gameObjectsQueue = gameManager.GetComponent<QueueHolder>().objectQueue;
+        gameObjectsQueue = enemyQueue.objectQueue;
         gameObjectsQueue = gameObjectsQueue.OrderBy(x => x.GetComponent<EnemySpawnManager>().DistanceToEnd).ToList();
         if (target != null)
         {

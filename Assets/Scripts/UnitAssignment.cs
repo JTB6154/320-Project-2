@@ -11,7 +11,7 @@ public class UnitAssignment : MonoBehaviour
         //inventory of units
         List<TroopPlaceholder> inventory = new List<TroopPlaceholder>();
         //troop empty units
-        TroopPlaceholder emptyInvItem = new TroopPlaceholder();
+        TroopPlaceholder emptyInvItem;
         //data of an empty unit
         [SerializeField] TroopData EmptyInvItem;
     [SerializeField] int maxInventorySize;
@@ -29,7 +29,7 @@ public class UnitAssignment : MonoBehaviour
 	#region UnityFunctions
 	    void Start()
         {
-            emptyInvItem.SetData(EmptyInvItem);
+            emptyInvItem = new TroopPlaceholder(EmptyInvItem);
             highlightedIndex = -1;
             buttons = buttonParent.GetComponentsInChildren<Button>();
             //maxInventorySize = buttons.Length;
