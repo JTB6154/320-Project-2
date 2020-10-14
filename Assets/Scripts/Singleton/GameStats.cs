@@ -64,6 +64,11 @@ public class GameStats : Singleton<GameStats>
 		return playerCash;
     }
 
+	public int GetPlayerHealth()
+	{
+		return playerHealth;
+	}
+
 	/// <summary>
 	/// Returns wether or not you can purchase the tower of given type and if you can removes the gold
 	/// </summary>

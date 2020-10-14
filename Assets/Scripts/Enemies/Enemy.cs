@@ -47,6 +47,7 @@ public class Enemy : MonoBehaviour
     public void Attack()
     {
         GameStats.Instance.SubtractHealth(Damage);
+        print(GameStats.Instance.GetPlayerHealth());
         // Do animation too
     }
 }
