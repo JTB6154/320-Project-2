@@ -12,7 +12,6 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     TroopPlaceholder[] inventory = new TroopPlaceholder[5];
                                   
-    //[SerializeField]
     [SerializeField] 
     int maxInventorySize;
     [SerializeField]
@@ -138,8 +137,6 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
-
-
     #endregion
 
 }
