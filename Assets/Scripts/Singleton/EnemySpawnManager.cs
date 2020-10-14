@@ -30,6 +30,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     private float spawnDelta;
     private float spawnDeltaRemaining;
 
+    QueueHolder queueHolder;
+
     private enum SpawnState{
         paused,
         spawning
@@ -57,6 +59,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         }
 
         hasBeenInitialized = true;
+        queueHolder = gameObject.GetComponent<QueueHolder>();
     }
 
     // Update is called once per frame
@@ -136,6 +139,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         {
             // Clear the spawnQueue
             spawnQueue.Clear();
+            queueHolder.objectQueue.Clear();
+
 
             string[] currentWave = waveData[WaveNumber - 1].Split(' ');
 
@@ -180,11 +185,13 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
                 enemy = Instantiate(melee, Path[0].transform.position, Quaternion.identity);
                 enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
                 enemy.GetComponent<FollowPath>().Path = Path;
+                queueHolder.objectQueue.Add(enemy);
                 break;
             case EnemyType.ranged:
                 enemy = Instantiate(ranged, Path[0].transform.position, Quaternion.identity);
                 enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
                 enemy.GetComponent<FollowPath>().Path = Path;
+                queueHolder.objectQueue.Add(enemy);
                 break;
             case EnemyType.none:
                 break;
