@@ -22,6 +22,7 @@ public class Inventory : MonoBehaviour
     [Header("Input")]
     [SerializeField] 
     GameObject buttonParent;//the parent of all of the buttons that make up the inventory
+    public GameObject[] buttons;
 
     [Space]
 
@@ -35,6 +36,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         inventory = new TroopPlaceholder[maxInventorySize];
+        buttons = new GameObject[maxInventorySize];
         highlightedIndex = -1;
     }
 
@@ -61,6 +63,28 @@ public class Inventory : MonoBehaviour
 
     } 
 
+    public void SetHighlightedUnit(int troopIndex)
+    {
+        highlightedIndex = troopIndex;
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if(buttons[i] == null)
+            {
+                continue;
+            }
+            InventoryUIUnit uiUnit = buttons[i].GetComponent<InventoryUIUnit>();
+            if (uiUnit.index != troopIndex)
+            {
+                uiUnit.isHighlighted = false;
+            }
+            else
+            {
+                uiUnit.isHighlighted = true;
+            }
+            uiUnit.UpdateUI();
+        }
+    }
+
     /// <summary>
     /// Removes and returns a troop at the given index
     /// </summary>
@@ -69,6 +93,8 @@ public class Inventory : MonoBehaviour
     {
         TroopPlaceholder toReturn = inventory[index];
         inventory[index] = null;
+        GameObject.Destroy(buttons[index]);
+        buttons[index] = null;
         return toReturn;
     }
 
@@ -113,10 +139,12 @@ public class Inventory : MonoBehaviour
         // Add it to Inventory Grid
         GameObject newInventoryItemGO = GameObject.Instantiate(inventoryGridUnit, buttonParent.transform);
         newInventoryItemGO.SetActive(true);
+        buttons[newSlot] = newInventoryItemGO;
         InventoryUIUnit newInventoryUnit = newInventoryItemGO.GetComponent<InventoryUIUnit>();
         newInventoryUnit.index = newSlot;
         newInventoryUnit.troop = troop;
         newInventoryUnit.UpdateUI();
+
         InfoWindow.ClearStatic();
 
 
