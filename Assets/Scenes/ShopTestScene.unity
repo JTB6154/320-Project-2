@@ -582,7 +582,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 217229229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90214533d6e52a646b87b8cabe3a9fff, type: 3}
+  m_Script: {fileID: 11500000, guid: 5435d890569427d48a68c24055a5da89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxInventorySize: 15
@@ -1233,7 +1233,7 @@ MonoBehaviour:
   TowerLayers:
     serializedVersion: 2
     m_Bits: 512
-  inventory: {fileID: 217229230}
+  inventory: {fileID: 0}
   cam: {fileID: 1084771530}
 --- !u!4 &961686464
 Transform:
@@ -3480,7 +3480,27 @@ PrefabInstance:
         type: 3}
       propertyPath: unitAssignment
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186193769907006839, guid: b0488f08b88b8b243af40c7b4136786d,
+        type: 3}
+      propertyPath: inventory
+      value: 
       objectReference: {fileID: 217229230}
+    - target: {fileID: 4186193769907006839, guid: b0488f08b88b8b243af40c7b4136786d,
+        type: 3}
+      propertyPath: highlightedColor.r
+      value: 0.13034001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186193769907006839, guid: b0488f08b88b8b243af40c7b4136786d,
+        type: 3}
+      propertyPath: highlightedColor.g
+      value: 0.30648977
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186193769907006839, guid: b0488f08b88b8b243af40c7b4136786d,
+        type: 3}
+      propertyPath: highlightedColor.b
+      value: 0.9528302
+      objectReference: {fileID: 0}
     - target: {fileID: 6625975448561789280, guid: b0488f08b88b8b243af40c7b4136786d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3615,11 +3635,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 217229229}
+      objectReference: {fileID: 1816874059}
     - target: {fileID: 6625975448561789283, guid: b0488f08b88b8b243af40c7b4136786d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: SetHighlightedUnit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625975448561789283, guid: b0488f08b88b8b243af40c7b4136786d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625975448561789283, guid: b0488f08b88b8b243af40c7b4136786d,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.8301887
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625975448561789283, guid: b0488f08b88b8b243af40c7b4136786d,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.6696333
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625975448561789283, guid: b0488f08b88b8b243af40c7b4136786d,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.6696333
       objectReference: {fileID: 0}
     - target: {fileID: 6625975448561789284, guid: b0488f08b88b8b243af40c7b4136786d,
         type: 3}
