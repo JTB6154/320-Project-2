@@ -65,24 +65,44 @@ public class Inventory : MonoBehaviour
 
     public void SetHighlightedUnit(int troopIndex)
     {
-        highlightedIndex = troopIndex;
-        for (int i = 0; i < buttons.Length; i++)
+        // Deselect
+        if (highlightedIndex == troopIndex)
         {
-            if(buttons[i] == null)
+            highlightedIndex = -1;
+            for (int i = 0; i < buttons.Length; i++)
             {
-                continue;
-            }
-            InventoryUIUnit uiUnit = buttons[i].GetComponent<InventoryUIUnit>();
-            if (uiUnit.index != troopIndex)
-            {
+                if (buttons[i] == null)
+                {
+                    continue;
+                }
+                InventoryUIUnit uiUnit = buttons[i].GetComponent<InventoryUIUnit>();
                 uiUnit.isHighlighted = false;
+                uiUnit.UpdateUI();
             }
-            else
-            {
-                uiUnit.isHighlighted = true;
-            }
-            uiUnit.UpdateUI();
         }
+        // select
+        else
+        {
+            highlightedIndex = troopIndex;
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                if (buttons[i] == null)
+                {
+                    continue;
+                }
+                InventoryUIUnit uiUnit = buttons[i].GetComponent<InventoryUIUnit>();
+                if (uiUnit.index != troopIndex)
+                {
+                    uiUnit.isHighlighted = false;
+                }
+                else
+                {
+                    uiUnit.isHighlighted = true;
+                }
+                uiUnit.UpdateUI();
+            }
+        }
+
     }
 
     /// <summary>
