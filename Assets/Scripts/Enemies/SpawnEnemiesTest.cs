@@ -22,7 +22,7 @@ public class SpawnEnemiesTest : MonoBehaviour
     void Start()
     {
         EnemySpawnManager.Instance.Initialize();
-        print(EnemySpawnManager.Instance.ChangeWaveInfoFile("C:/Users/Jack/Documents/GitHub/320-Project-2/Assets/Scripts/TestingSpawnFile.wif"));
+        print(EnemySpawnManager.Instance.ChangeWaveInfoFile("C:/Users/Jack/Documents/GitHub/320-Project-2/Assets/TestingSpawnFile.wif"));
             EnemySpawnManager.Instance.StartWave(1);
     }
 
