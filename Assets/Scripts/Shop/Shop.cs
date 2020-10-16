@@ -14,7 +14,7 @@ public class Shop : MonoBehaviour
     {
         Debug.Log("Shop Start Begin");
         currentShop = new TowerType[5];
-        RefreshShop();
+        RefreshShopIrregular(1);
         Debug.Log("Shop Start Done");
     }
 
@@ -30,6 +30,30 @@ public class Shop : MonoBehaviour
             currentShop[i] = newTower;
             // Enable all the buttons
             uiManager.towerButtons[i].SetActive(true);
+        }
+
+        uiManager.UpdateShopUI(this);
+    }
+
+    // Populates the shop with the specificed number of items
+    public void RefreshShopIrregular(int amount)
+    {
+        // Basic random refresh
+        int numTowers = GameStats.Instance.GetNumTowers();
+        // Get a random tower, 5 times
+        for (int i = 0; i < 5; i++)
+        {
+            if (i < amount)
+            {
+                TowerType newTower = (TowerType)Random.Range(1, numTowers + 1);
+                currentShop[i] = newTower;
+                // Enable all the buttons
+                uiManager.towerButtons[i].SetActive(true);
+            }
+            else
+            {
+                uiManager.towerButtons[i].SetActive(false);
+            }
         }
 
         uiManager.UpdateShopUI(this);
@@ -73,7 +97,7 @@ public class Shop : MonoBehaviour
     public void UpdateInfoWindow(int index)
     {
         TroopData data = GameStats.Instance.TroopBaseData[currentShop[index]];
-        Debug.Log(data.TroopName);
+        //Debug.Log(data.TroopName);
         InfoWindow.UpdateInfoStatic(data);
         
     }
