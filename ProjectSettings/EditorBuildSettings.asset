@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/John Test Scene.unity
     guid: 30f3f5323f4808d4a8162bd2c49518a7
+  - enabled: 1
+    path: Assets/Scenes/End Scene.unity
+    guid: e27326e2739d9374d9c9c392335ba49e
+  - enabled: 1
+    path: Assets/Scenes/Pause Scene.unity
+    guid: 9cce974925c96474bab0a90f1ed6cae4
   m_configObjects: {}
