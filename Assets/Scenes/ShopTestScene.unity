@@ -1586,7 +1586,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 544
   TowerPurchaseButtonText: {fileID: 1498178583}
-  EnemyManager: {fileID: 0}
+  EnemyManager: {fileID: 962300381}
 --- !u!4 &961686464
 Transform:
   m_ObjectHideFlags: 0
