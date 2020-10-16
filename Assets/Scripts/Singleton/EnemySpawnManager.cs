@@ -147,6 +147,14 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         // Don't let 2 waves spawn at the same time
         if (spawnState == SpawnState.spawning)
             return;
+        else
+        {
+            for (int i = 0; i < queueHolder.objectQueue.Count; i++)
+            {
+                if (queueHolder.objectQueue[i].activeSelf)
+                    return;
+            }
+        }
 
         currentWave = WaveNumber;
 

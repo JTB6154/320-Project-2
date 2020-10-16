@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Empty
   m_EditorClassIdentifier: 
   TroopName: Empty
-  Cost: 0
+  Description: 
+  Cost: 10
   AttackSpeed:
   - 0
   - 0

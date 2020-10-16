@@ -7,6 +7,7 @@ public class Tower : MonoBehaviour
 {
     TroopPlaceholder troop;
     public bool isUnitAssigned;
+    public GameObject enemyQueueHolder;
     public QueueHolder enemyQueue;
     public float timer = 0.0f;
     public float waitTime = 0.0f;
@@ -20,6 +21,7 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
+        enemyQueue = enemyQueueHolder.GetComponent<QueueHolder>();
         gameObjectsQueue=new List<GameObject>();
         selfRenderer = GetComponent<SpriteRenderer>();
         emptyTower = selfRenderer.sprite;
@@ -30,7 +32,7 @@ public class Tower : MonoBehaviour
         if (!isUnitAssigned) return;
 
         timer += Time.deltaTime;
-        waitTime = 1000 / troop.AttackSpeed;
+        waitTime = 1 / troop.AttackSpeed;
         if (timer > waitTime)
         {
             timer -= waitTime;
