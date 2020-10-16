@@ -32,7 +32,7 @@ public class Tower : MonoBehaviour
         if (!isUnitAssigned) return;
 
         timer += Time.deltaTime;
-        waitTime = 1000 / troop.AttackSpeed;
+        waitTime = 1 / troop.AttackSpeed;
         if (timer > waitTime)
         {
             timer -= waitTime;
