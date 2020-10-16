@@ -30,4 +30,4 @@ MonoBehaviour:
   TowerType: 3
   ShopPortrait: {fileID: 21300000, guid: 4895fcf8b18abb8489adb8381a276b4e, type: 3}
   InventorySprite: {fileID: 21300000, guid: 4895fcf8b18abb8489adb8381a276b4e, type: 3}
-  BattlefieldSprite: {fileID: 0}
+  BattlefieldSprite: {fileID: 21300000, guid: 782cea570f51faa43b401a80fda9db15, type: 3}
