@@ -30,7 +30,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     private float spawnDelta;
     private float spawnDeltaRemaining;
 
-    QueueHolder queueHolder;
+    private QueueHolder queueHolder;
+    private int currentWave;
 
     private enum SpawnState{
         paused,
@@ -63,6 +64,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
 
         // Default value
         ChangeWaveInfoFile("C:/Users/Jack/Documents/GitHub/320-Project-2/Assets/TestingSpawnFile.wif");
+        currentWave = 1;
     }
 
     // Update is called once per frame
@@ -129,6 +131,14 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     }
 
     /// <summary>
+    /// Starts the next wave
+    /// </summary>
+    public void StartWave()
+    {
+        StartWave(currentWave + 1);
+    }
+
+    /// <summary>
     /// Starts the Next wave of Enemy Spawns
     /// </summary>
     /// <param name="WaveNumber">The wave number of the wave to start</param>
@@ -137,6 +147,8 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         // Don't let 2 waves spawn at the same time
         if (spawnState == SpawnState.spawning)
             return;
+
+        currentWave = WaveNumber;
 
         if (WaveNumber < waveData.Count) // Curated Mode
         {
