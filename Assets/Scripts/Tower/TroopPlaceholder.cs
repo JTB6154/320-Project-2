@@ -44,7 +44,7 @@ public class TroopPlaceholder
     {
         get
         {
-            return data.Range[tier - 1];
+            return data.Range[tier - 1] / 50;
         }
     }
     public int Cost

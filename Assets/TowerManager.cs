@@ -16,6 +16,7 @@ public class TowerManager : MonoBehaviour
 	[SerializeField] LayerMask towerFreeZone;
 	GameObject floatingTower;
 	[SerializeField] TextMeshProUGUI TowerPurchaseButtonText;
+	[SerializeField] GameObject EnemyManager;
 
 	private void Start()
 	{
@@ -101,6 +102,7 @@ public class TowerManager : MonoBehaviour
 		{
 			GameStats.Instance.SetCursorState(CursorState.BuyingTower);
 			floatingTower = Instantiate(emptyTower);
+			floatingTower.GetComponent<Tower>().enemyQueueHolder = EnemyManager;
 			floatingTower.layer = 10;
 			SetTowerPurchaseButtonText();
 		}

@@ -67,7 +67,7 @@ public class FollowPath : MonoBehaviour
         {
             if (currentNode == Path.Length - 1)
             {
-                if ((Path[currentNode].transform.position - transform.position).magnitude < 0.5f)
+                if ((Path[currentNode].transform.position - transform.position).magnitude < 1f)
                 {
                     hasReachedLast = true;
                 }

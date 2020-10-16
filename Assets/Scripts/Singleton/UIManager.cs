@@ -25,13 +25,16 @@ public class UIManager : MonoBehaviour
 
     public void UpdateShopUI(Shop shop)
     {
-        foreach(GameObject go in towerButtons)
+        foreach (GameObject go in towerButtons)
         {
-            ShopItem shopItemInfo = go.GetComponentInChildren<ShopItem>();
+            ShopItem shopItemInfo = go.GetComponent<ShopItem>();
             TowerType currentTowerType = shop.currentShop[shopItemInfo.index];
-            shopItemInfo.costText.text = GameStats.Instance.GetCost(currentTowerType).ToString();
-            shopItemInfo.nameText.text = currentTowerType.ToString();
-            shopItemInfo.towerImage.sprite = GameStats.Instance.GetShopPortrait(currentTowerType);
+            if (currentTowerType != TowerType.None)
+            {
+                shopItemInfo.costText.text = GameStats.Instance.GetCost(currentTowerType).ToString();
+                shopItemInfo.nameText.text = currentTowerType.ToString();
+                shopItemInfo.towerImage.sprite = GameStats.Instance.GetShopPortrait(currentTowerType);
+            }
         }
     }
 

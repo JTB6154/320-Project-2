@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public float CurrentHealth;
     public int Damage = 1;
     public float AttackSpeed = 0.5f;
+    public int Value = 5;
 
     public bool IsRanged = false;
 
@@ -27,6 +28,10 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
+
+        if (CurrentHealth <= 0)
+            Die();
+
     }
 
     /// <summary>
@@ -49,5 +54,14 @@ public class Enemy : MonoBehaviour
         GameStats.Instance.SubtractHealth(Damage);
         print(GameStats.Instance.GetPlayerHealth());
         // Do animation too
+    }
+
+    /// <summary>
+    /// Gives the player the value of the unit into their 
+    /// </summary>
+    public void Die()
+    {
+        GameStats.Instance.AddGold(Value);
+        gameObject.SetActive(false);
     }
 }
