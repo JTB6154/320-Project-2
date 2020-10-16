@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Shop : MonoBehaviour
 {
+    public int refreshCost = 5;
     public Inventory unitAssignment;
     public UIManager uiManager;
     public TowerType[] currentShop;
@@ -57,6 +58,16 @@ public class Shop : MonoBehaviour
             }
         }
 
+    }
+
+    public void TryRefresh()
+    {
+        if (GameStats.Instance.GetCursorState() == CursorState.BuyingTower) return;
+
+        if (GameStats.Instance.PurchaseRefresh(refreshCost))
+        {
+            RefreshShop();
+        }
     }
 
     public void UpdateInfoWindow(int index)

@@ -105,6 +105,23 @@ public class GameStats : Singleton<GameStats>
 		}
 	}
 
+	/// <summary>
+	/// Returns true if the player has enough cash to refresh the shop, and removes the gold
+	/// </summary>
+	/// <param name="cost"/>The cost of refreshing the shop
+	/// <returns>returns true if the shop refresh could be and was purchases</returns>
+	public bool PurchaseRefresh(int cost)
+    {
+		if (cost > playerCash)
+		{
+			return false;
+		}
+		else
+		{
+			playerCash -= cost;
+			return true;
+		}
+	}
 
 	/// <summary>
 	/// adds the specified amount of gold to the players inventory

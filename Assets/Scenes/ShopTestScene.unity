@@ -1349,6 +1349,7 @@ MonoBehaviour:
   towerFreeZone:
     serializedVersion: 2
     m_Bits: 544
+  TowerPurchaseText: {fileID: 0}
 --- !u!4 &961686464
 Transform:
   m_ObjectHideFlags: 0
@@ -2458,7 +2459,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10, y: -0.00006508493}
+  m_AnchoredPosition: {x: 10, y: 0.00032815244}
   m_SizeDelta: {x: -20, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1438381676
@@ -3343,7 +3344,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1664584000}
-        m_MethodName: RefreshShop
+        m_MethodName: TryRefresh
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3552,6 +3553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98665d526984cd44885fdbf7e5fc6f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  refreshCost: 5
   unitAssignment: {fileID: 217229230}
   uiManager: {fileID: 1425016415}
   currentShop: 
@@ -4271,7 +4273,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1867794481}
   m_HandleRect: {fileID: 1867794480}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
