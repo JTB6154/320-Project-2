@@ -46,7 +46,7 @@ public class Tower : MonoBehaviour
     {
         //Update queue every frame 
         gameObjectsQueue = enemyQueue.objectQueue;
-        gameObjectsQueue = gameObjectsQueue.OrderBy(x => x.GetComponent<EnemySpawnManager>().DistanceToEnd).ToList();
+        gameObjectsQueue = gameObjectsQueue.OrderBy(x => x.GetComponent<FollowPath>().DistanceToEnd).ToList();
         if (target != null)
         {
             //Check if the last object being shot is still in range
