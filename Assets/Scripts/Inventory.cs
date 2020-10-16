@@ -192,6 +192,8 @@ public class Inventory : MonoBehaviour
 
     public void CombineTroops()
     {
+        if (highlightedIndex == -1) return;
+
         TroopPlaceholder temp = PopHighlightedTroop();
         List<int> sameTypeIndex = new List<int>();
         for(int i=0; i < inventory.Length; i++)
