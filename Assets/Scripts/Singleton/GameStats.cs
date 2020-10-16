@@ -118,18 +118,31 @@ public class GameStats : Singleton<GameStats>
 	public bool PurchaseTower()
 	{
 		if (towerCost > playerCash)
-		{
 			return false;
-		}
-		else
-		{
+		else{
 			playerCash -= towerCost;
 			numTowersPurchased++;
 			towerCost += towerCostIncrease * numTowersPurchased;
 			return true;
 		}
 	}
-
+	/// <summary>
+	/// Returns true if the player has enough cash to refresh the shop, and removes the gold
+	/// </summary>
+	/// <param name="cost"/>The cost of refreshing the shop
+	/// <returns>returns true if the shop refresh could be and was purchases</returns>
+	public bool PurchaseRefresh(int cost)
+    {
+		if (cost > playerCash)
+		{
+			return false;
+		}
+		else
+		{
+			playerCash -= cost;
+			return true;
+		}
+	}
 
 	/// <summary>
 	/// adds the specified amount of gold to the players inventory
