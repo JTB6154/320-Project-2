@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TowerManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class TowerManager : MonoBehaviour
 	[SerializeField] GameObject emptyTower;
 	[SerializeField] LayerMask towerFreeZone;
 	GameObject floatingTower;
-	[SerializeField] Text TowerPurchaseText;
+	[SerializeField] TextMeshProUGUI TowerPurchaseButtonText;
 
 	private void Start()
 	{
@@ -78,12 +79,13 @@ public class TowerManager : MonoBehaviour
 			SetFloatingTowerColor(Color.white);
 		}
 
-		if (Input.GetMouseButtonDown(0) && !hit)
+		if (Input.GetMouseButtonDown(0) && !hit && GameStats.Instance.PurchaseTower())
 		{
 			floatingTower.layer = 9;
 			SetFloatingTowerColor(Color.white);
 			GameStats.Instance.SetCursorState(CursorState.Free);
 			floatingTower = null;
+			SetTowerPurchaseButtonText();
 		}
 
 	}
@@ -100,11 +102,25 @@ public class TowerManager : MonoBehaviour
 			GameStats.Instance.SetCursorState(CursorState.BuyingTower);
 			floatingTower = Instantiate(emptyTower);
 			floatingTower.layer = 10;
+			SetTowerPurchaseButtonText();
 		}
 		else if(GameStats.Instance.GetCursorState() == CursorState.BuyingTower)
 		{
 			Destroy(floatingTower);
 			GameStats.Instance.SetCursorState(CursorState.Free);
+			SetTowerPurchaseButtonText();
+		}
+	}
+
+	private void SetTowerPurchaseButtonText()
+	{
+		if (GameStats.Instance.GetCursorState() == CursorState.BuyingTower)
+		{
+			TowerPurchaseButtonText.text = "Cancel";
+		}
+		else if (GameStats.Instance.GetCursorState() == CursorState.Free)
+		{
+			TowerPurchaseButtonText.text = "Buy Tower: " + GameStats.Instance.GetCurrentTowerCost();
 		}
 	}
 }

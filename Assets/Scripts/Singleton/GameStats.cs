@@ -28,6 +28,10 @@ public class GameStats : Singleton<GameStats>
 	int playerHealth;
 	bool hasBeenInitialized = false;
 	CursorState state;
+	int towerBaseCost = 10;
+	int towerCost;
+	int towerCostIncrease = 5;
+	int numTowersPurchased = 0;
 
 
 
@@ -47,6 +51,7 @@ public class GameStats : Singleton<GameStats>
 		//set player health to the players max health
 		playerHealth = playerMaxHealth;
 
+		towerCost = towerBaseCost;
 
 		//mark that the class has been initialized
 		hasBeenInitialized = true;
@@ -87,6 +92,11 @@ public class GameStats : Singleton<GameStats>
 		state = cState;
 	}
 
+	public int GetCurrentTowerCost()
+	{
+		return towerCost;
+	}
+
 	/// <summary>
 	/// Returns wether or not you can purchase the tower of given type and if you can removes the gold
 	/// </summary>
@@ -101,6 +111,21 @@ public class GameStats : Singleton<GameStats>
 		else
 		{
 			playerCash -= GetCost(type);
+			return true;
+		}
+	}
+
+	public bool PurchaseTower()
+	{
+		if (towerCost > playerCash)
+		{
+			return false;
+		}
+		else
+		{
+			playerCash -= towerCost;
+			numTowersPurchased++;
+			towerCost += towerCostIncrease * numTowersPurchased;
 			return true;
 		}
 	}
