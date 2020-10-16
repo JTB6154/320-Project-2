@@ -588,6 +588,7 @@ MonoBehaviour:
   maxInventorySize: 15
   itemCount: 0
   buttonParent: {fileID: 1438381674}
+  buttons: []
   highlightedIndex: 0
   inventoryGridUnit: {fileID: 1816874060}
 --- !u!4 &217229231
@@ -1233,7 +1234,7 @@ MonoBehaviour:
   TowerLayers:
     serializedVersion: 2
     m_Bits: 512
-  inventory: {fileID: 0}
+  inventory: {fileID: 217229230}
   cam: {fileID: 1084771530}
 --- !u!4 &961686464
 Transform:

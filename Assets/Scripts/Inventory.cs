@@ -128,12 +128,13 @@ public class Inventory : MonoBehaviour
     {
         if (highlightedIndex != -1)
         {
-            TroopPlaceholder temp = inventory[highlightedIndex];
-            inventory[highlightedIndex] = null; //RemoveAt(highlightedIndex);
-                                                //inventory.Add(emptyInvItem);
-            itemCount -= 1;
-            highlightedIndex = -1;
-            return temp;
+            //TroopPlaceholder temp = inventory[highlightedIndex];
+            //inventory[highlightedIndex] = null; //RemoveAt(highlightedIndex);
+            //                                    //inventory.Add(emptyInvItem);
+            //itemCount -= 1;
+            //highlightedIndex = -1;
+            //return temp;
+            return RemoveAtIndex(highlightedIndex);
         }
 
         return null;

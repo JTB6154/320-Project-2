@@ -17,12 +17,23 @@ public class TowerManager : MonoBehaviour
 			RaycastHit2D hit = Physics2D.Raycast(new Vector2(mousePos.x, mousePos.y), Vector2.zero,0,TowerLayers);
 			if (hit)
 			{
-			
-				TroopPlaceholder temp = inventory.PopHighlightedTroop();
-				if (temp != null)
+				Tower tempTower = hit.collider.gameObject.GetComponent<Tower>();
+				TroopPlaceholder temp;
+				if (tempTower.isUnitAssigned)
 				{
-					hit.collider.gameObject.GetComponent<Tower>().AssignUnit(temp);
-					
+					temp = tempTower.RemoveUnit();
+					if (!inventory.AddTroop(temp))
+					{
+						tempTower.AssignUnit(temp);
+					}
+				}
+				else
+				{
+					temp = inventory.PopHighlightedTroop();
+					if (temp != null)
+					{
+						tempTower.AssignUnit(temp);
+					}
 				}
 			}
 

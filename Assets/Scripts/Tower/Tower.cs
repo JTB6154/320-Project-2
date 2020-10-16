@@ -15,16 +15,19 @@ public class Tower : MonoBehaviour
     private GameObject target;
     private bool shooting = false;
     private SpriteRenderer selfRenderer;
+    Sprite emptyTower;
     private SpriteRenderer enemySprite;
 
     void Start()
     {
         gameObjectsQueue=new List<GameObject>();
+        selfRenderer = GetComponent<SpriteRenderer>();
+        emptyTower = selfRenderer.sprite;
     }
 
     void Update()
     {
-        if (troop == null) return;
+        if (!isUnitAssigned) return;
 
         timer += Time.deltaTime;
         waitTime = 1000 / troop.AttackSpeed;
@@ -40,6 +43,18 @@ public class Tower : MonoBehaviour
         if (isUnitAssigned) return;
         isUnitAssigned = true;
         this.troop = troop;
+        selfRenderer.sprite = troop.InventorySprite;
+    }
+
+    public TroopPlaceholder RemoveUnit()
+    {
+        if (!isUnitAssigned) return null;
+        isUnitAssigned = false;
+        TroopPlaceholder temp = troop;
+        troop = null;
+        selfRenderer.sprite = emptyTower;
+        return temp;
+        
     }
 
     public void FindAndShootTarget()
