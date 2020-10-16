@@ -13,7 +13,7 @@ public class Shop : MonoBehaviour
     public void Start()
     {
         Debug.Log("Shop Start Begin");
-        currentShop = new TowerType[5];
+        currentShop = new TowerType[5];// { TowerType.None, TowerType.None, TowerType.None, TowerType.None, TowerType.None };
         RefreshShopIrregular(1);
         Debug.Log("Shop Start Done");
     }
