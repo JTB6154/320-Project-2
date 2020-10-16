@@ -10,6 +10,11 @@ public enum TowerType {
 	Theurgist
 }
 
+public enum CursorState { 
+	Free,
+	BuyingTower
+}
+
 public class GameStats : Singleton<GameStats>
 {
 	[SerializeField]
@@ -22,6 +27,9 @@ public class GameStats : Singleton<GameStats>
 	int playerMaxHealth = 100;
 	int playerHealth;
 	bool hasBeenInitialized = false;
+	CursorState state;
+
+
 
 	public override void Initialize()
 	{
@@ -67,6 +75,16 @@ public class GameStats : Singleton<GameStats>
 	public int GetPlayerHealth()
 	{
 		return playerHealth;
+	}
+
+	public CursorState GetCursorState()
+	{ 
+		return state; 
+	}
+
+	public void SetCursorState(CursorState cState)
+	{
+		state = cState;
 	}
 
 	/// <summary>
