@@ -117,6 +117,7 @@ public class Inventory : MonoBehaviour
         buttons[index] = null;
         // Just clear the highlighted unit, just to be safe
         SetHighlightedUnit(-1);
+        itemCount--;
         return toReturn;
     }
 

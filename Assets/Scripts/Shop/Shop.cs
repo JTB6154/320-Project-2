@@ -37,6 +37,8 @@ public class Shop : MonoBehaviour
     // Will try to purchase a unit from the shop at the index given
     public void BuyTower(int index)
     {
+        if (GameStats.Instance.GetCursorState() == CursorState.BuyingTower) return;
+
         if (currentShop[index] == TowerType.None)
         {
             return;// false;

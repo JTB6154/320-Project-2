@@ -36,6 +36,8 @@ public class InventoryUIUnit : MonoBehaviour
     
     public void SetHighlightedUnit()
     {
+        if (GameStats.Instance.GetCursorState() == CursorState.BuyingTower) return;
+
         inventory.SetHighlightedUnit(index);
     }
 

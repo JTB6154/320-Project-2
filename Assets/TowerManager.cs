@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class TowerManager : MonoBehaviour
 	[SerializeField] GameObject emptyTower;
 	[SerializeField] LayerMask towerFreeZone;
 	GameObject floatingTower;
+	[SerializeField] Text TowerPurchaseText;
 
 	private void Start()
 	{
