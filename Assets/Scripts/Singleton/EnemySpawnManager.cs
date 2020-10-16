@@ -63,8 +63,14 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         queueHolder = gameObject.GetComponent<QueueHolder>();
 
         // Default value
-        ChangeWaveInfoFile("C:/Users/Jack/Documents/GitHub/320-Project-2/Assets/TestingSpawnFile.wif");
+        print(Application.dataPath);
+        ChangeWaveInfoFile(Application.dataPath + "/TestingSpawnFile.wif");
         currentWave = 1;
+    }
+
+    private void Start()
+    {
+        EnemySpawnManager.Instance.Initialize();
     }
 
     // Update is called once per frame
