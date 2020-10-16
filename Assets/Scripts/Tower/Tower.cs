@@ -43,7 +43,7 @@ public class Tower : MonoBehaviour
         if (isUnitAssigned) return;
         isUnitAssigned = true;
         this.troop = troop;
-        selfRenderer.sprite = troop.InventorySprite;
+        selfRenderer.sprite = troop.BattlefieldSprite;
     }
 
     public TroopPlaceholder RemoveUnit()

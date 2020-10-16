@@ -71,6 +71,13 @@ public class TroopPlaceholder
         }
     }
 
+    public Sprite BattlefieldSprite
+    {
+        get
+        {
+            return data.BattlefieldSprite;
+        }
+    }
     public void SetData(TroopData newData)
     {
         if (data != null) return;

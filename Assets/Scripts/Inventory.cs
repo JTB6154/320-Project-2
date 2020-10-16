@@ -189,6 +189,32 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
+
+    public void CombineTroops()
+    {
+        TroopPlaceholder temp = PopHighlightedTroop();
+        List<int> sameTypeIndex = new List<int>();
+        for(int i=0; i < inventory.Length; i++)
+        {
+            if (inventory[i] == null) continue;
+
+            if (inventory[i].GetType() == temp.GetType() && inventory[i].tier == temp.tier)
+            {
+                sameTypeIndex.Add(i);
+            }
+        }
+
+        if (sameTypeIndex.Count > 1)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                RemoveAtIndex(sameTypeIndex[i]);
+            }
+            temp.TierUp();
+        }
+
+        AddTroop(temp);
+    }
     #endregion
 
 }
