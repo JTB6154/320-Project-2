@@ -200,7 +200,7 @@ public class Inventory : MonoBehaviour
         {
             if (inventory[i] == null) continue;
 
-            if (inventory[i].GetType() == temp.GetType() && inventory[i].tier == temp.tier)
+            if (inventory[i].data.TowerType == temp.data.TowerType && inventory[i].tier == temp.tier)
             {
                 sameTypeIndex.Add(i);
             }
