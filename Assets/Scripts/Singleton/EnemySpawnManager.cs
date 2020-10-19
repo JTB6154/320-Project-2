@@ -9,7 +9,7 @@ public enum EnemyType {
     ranged,
     melee };
 
-public class EnemySpawnManager : Singleton<EnemySpawnManager>
+public class EnemySpawnManager : MonoBehaviour
 {
     bool hasBeenInitialized = false;
 
@@ -31,7 +31,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     private float spawnDeltaRemaining;
 
     private QueueHolder queueHolder;
-    private int currentWave;
+    private int currentWaveNumber;
 
     private enum SpawnState{
         paused,
@@ -40,11 +40,10 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
 
     private SpawnState spawnState;
 
-    public override void Initialize()
+    void Start()
     {
-        //only initialize if we haven't been before
-        if (hasBeenInitialized) return;
-        //initialize any arrays or dictionaries in the Singleton
+
+        //initialize any arrays or dictionaries
 
         waveData = new List<string>();
         spawnQueue = new Queue<EnemyType>();
@@ -59,18 +58,12 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
             DistanceToEnd += (Path[i + 1].transform.position - Path[i].transform.position).magnitude;
         }
 
-        hasBeenInitialized = true;
         queueHolder = gameObject.GetComponent<QueueHolder>();
 
         // Default value
-        print(Application.dataPath);
-        ChangeWaveInfoFile(Application.dataPath + "/TestingSpawnFile.wif");
-        currentWave = 1;
-    }
-
-    private void Start()
-    {
-        EnemySpawnManager.Instance.Initialize();
+        //print(Application.dataPath);
+        ChangeWaveInfoFile("TestingSpawnFile");
+        currentWaveNumber = 0;
     }
 
     // Update is called once per frame
@@ -98,16 +91,11 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     /// <summary>
     /// Changes the file that the wave is 
     /// </summary>
-    /// <param name="FilePath">File Path of the new .wif file</param>
+    /// <param name="FileName">File name of the new .wif file</param>
     /// <returns>True if successful</returns>
-    public bool ChangeWaveInfoFile(string FilePath)
+    public bool ChangeWaveInfoFile(string FileName)
     {
-        // Test to see if the file is the right format
-        if(FilePath.Substring(FilePath.Length - 4) != ".wif")
-        {
-            //print("not suitable file structure");
-            return false;
-        }
+        string FilePath = Application.dataPath + "/" + FileName + ".wif";
 
         // Test to see if the file exists and has data
         try
@@ -141,7 +129,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
     /// </summary>
     public void StartWave()
     {
-        StartWave(currentWave + 1);
+        StartWave(currentWaveNumber + 1);
     }
 
     /// <summary>
@@ -161,10 +149,14 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
                     return;
             }
         }
+        
+        currentWaveNumber = WaveNumber;
 
-        currentWave = WaveNumber;
+        print(WaveNumber);
+        print(waveData.Count);
+        print(waveData);
 
-        if (WaveNumber < waveData.Count) // Curated Mode
+        if (WaveNumber <= waveData.Count) // Curated Mode
         {
             // Clear the spawnQueue
             spawnQueue.Clear();
@@ -187,7 +179,7 @@ public class EnemySpawnManager : Singleton<EnemySpawnManager>
         }
         else // Endless mode
         {
-            // TODO: Create algorithm for endless mode spawn determination
+            print("we're in endless now");// TODO: Create algorithm for endless mode spawn determination
         }
 
         spawnState = SpawnState.spawning;

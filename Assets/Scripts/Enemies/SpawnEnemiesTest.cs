@@ -21,9 +21,7 @@ public class SpawnEnemiesTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnemySpawnManager.Instance.Initialize();
-        print(EnemySpawnManager.Instance.ChangeWaveInfoFile("C:/Users/Jack/Documents/GitHub/320-Project-2/Assets/TestingSpawnFile.wif"));
-            EnemySpawnManager.Instance.StartWave(1);
+        
     }
 
     // Update is called once per frame
@@ -62,5 +60,11 @@ public class SpawnEnemiesTest : MonoBehaviour
 
         enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
         enemy.GetComponent<FollowPath>().Path = Path;
+    }
+
+    public void StartWave()
+    {
+        //EnemySpawnManager.Instance.Initialize();
+        //EnemySpawnManager.Instance.StartWave();
     }
 }

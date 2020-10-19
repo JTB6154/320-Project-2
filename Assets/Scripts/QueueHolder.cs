@@ -17,4 +17,21 @@ public class QueueHolder : MonoBehaviour
     {
         
     }
+
+    /// <summary>
+    /// Destroys game objects and clears the queue completely
+    /// </summary>
+    void ClearAll()
+    {
+        // Destroy objects
+        while(objectQueue.Count > 0)
+        {
+            GameObject current = objectQueue[0];
+            objectQueue.RemoveAt(0);
+            Destroy(current);
+        }
+
+        // Clear the queue in case something didn't delete properly
+        objectQueue.Clear();
+    }
 }
