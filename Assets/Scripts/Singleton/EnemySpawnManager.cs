@@ -95,7 +95,7 @@ public class EnemySpawnManager : MonoBehaviour
     /// <returns>True if successful</returns>
     public bool ChangeWaveInfoFile(string FileName)
     {
-        string FilePath = Application.dataPath + "/" + FileName + ".wif";
+        string FilePath = Application.dataPath + "/LevelFiles/" + FileName + ".wif";
 
         // Test to see if the file exists and has data
         try
@@ -160,7 +160,7 @@ public class EnemySpawnManager : MonoBehaviour
         {
             // Clear the spawnQueue
             spawnQueue.Clear();
-            queueHolder.objectQueue.Clear();
+            queueHolder.ClearAll();
 
 
             string[] currentWave = waveData[WaveNumber - 1].Split(' ');
