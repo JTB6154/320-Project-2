@@ -32,6 +32,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     private QueueHolder queueHolder;
     private int currentWaveNumber;
+    private AudioSource audioSource;
 
     private enum SpawnState{
         paused,
@@ -58,7 +59,8 @@ public class EnemySpawnManager : MonoBehaviour
             DistanceToEnd += (Path[i + 1].transform.position - Path[i].transform.position).magnitude;
         }
 
-        queueHolder = gameObject.GetComponent<QueueHolder>();
+        queueHolder = GetComponent<QueueHolder>();
+        audioSource = GetComponent<AudioSource>();
 
         // Default value
         //print(Application.dataPath);
@@ -206,12 +208,14 @@ public class EnemySpawnManager : MonoBehaviour
                 enemy = Instantiate(melee, Path[0].transform.position, Quaternion.identity);
                 enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
                 enemy.GetComponent<FollowPath>().Path = Path;
+                enemy.GetComponent<Enemy>().manager = GetComponent<EnemySpawnManager>();
                 queueHolder.objectQueue.Add(enemy);
                 break;
             case EnemyType.ranged:
                 enemy = Instantiate(ranged, Path[0].transform.position, Quaternion.identity);
                 enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
                 enemy.GetComponent<FollowPath>().Path = Path;
+                enemy.GetComponent<Enemy>().manager = GetComponent<EnemySpawnManager>();
                 queueHolder.objectQueue.Add(enemy);
                 break;
             case EnemyType.none:
@@ -219,5 +223,10 @@ public class EnemySpawnManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void playSound(AudioClip clip, float volume)
+    {
+        audioSource.PlayOneShot(clip, volume);
     }
 }
