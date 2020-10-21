@@ -6,6 +6,10 @@ public class Projectile : MonoBehaviour
 {
     public GameObject target;
     public float Damage { get; set; }
+
+    private float nextActionTime = 0.0f;
+    public float period = 0.016f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,26 +20,30 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target != null && target.GetComponent<Enemy>().CurrentHealth>0)
+        if (Time.time > nextActionTime)
         {
-            this.transform.position += (0.05f * (target.transform.position - this.transform.position));
-            if (target.GetComponent<Enemy>().CurrentHealth > 0)
+            nextActionTime += period;
+            if (target != null && target.GetComponent<Enemy>().CurrentHealth > 0)
             {
-                if (AABBCollision(gameObject, target))
+                this.transform.position += (0.05f * (target.transform.position - this.transform.position));
+                if (target.GetComponent<Enemy>().CurrentHealth > 0)
                 {
-                    target.GetComponent<Enemy>().TakeDamage(Damage);
-                    Destroy(gameObject);
+                    if (AABBCollision(gameObject, target))
+                    {
+                        target.GetComponent<Enemy>().TakeDamage(Damage);
+                        Destroy(gameObject);
+                    }
+                    if (target.GetComponent<Enemy>().CurrentHealth < 0 || target.activeInHierarchy == false || target == null)
+                    {
+                        Destroy(gameObject);
+                    }
                 }
-                if(target.GetComponent<Enemy>().CurrentHealth < 0 || target.activeInHierarchy == false || target == null )
-                {
-                    Destroy(gameObject);
-                }
-            }
 
-        }
-        else
-        {
-            Destroy(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
