@@ -2729,8 +2729,10 @@ MonoBehaviour:
   towerFreeZone:
     serializedVersion: 2
     m_Bits: 544
-  projectile: {fileID: 7125550889233284290, guid: e03bc575d4c14974082c2bd82075251e,
-    type: 3}
+  projectiles:
+  - {fileID: 7125550889233284290, guid: e03bc575d4c14974082c2bd82075251e, type: 3}
+  - {fileID: 7125550889233284290, guid: 6176b5154e392a84a9ca5274dd35598f, type: 3}
+  - {fileID: 7125550889233284290, guid: 9a33f7b3b94eb544285d0fc619029f0d, type: 3}
   TowerPurchaseButtonText: {fileID: 883344243}
   EnemyManager: {fileID: 1366801766}
 --- !u!4 &1104666845

@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
             nextActionTime += period;
             if (target != null && target.GetComponent<Enemy>().CurrentHealth > 0)
             {
-                this.transform.position += (0.05f * (target.transform.position - this.transform.position));
+                this.transform.position += (0.075f * (target.transform.position - this.transform.position));
                 if (target.GetComponent<Enemy>().CurrentHealth > 0)
                 {
                     if (AABBCollision(gameObject, target))
