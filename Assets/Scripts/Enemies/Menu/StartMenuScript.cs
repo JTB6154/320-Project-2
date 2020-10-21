@@ -9,6 +9,7 @@ public class StartMenuScript : MonoBehaviour
     public void LoadGameScene(string SceneName)
     {
         Time.timeScale = 1f;
+        GameStats.runTutorial = true;
         SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
     }
 
@@ -17,6 +18,13 @@ public class StartMenuScript : MonoBehaviour
     public void QuitButton()
     {
         Application.Quit();
+    }
+
+    public void LoadGameWithoutTutorial( string SceneName)
+    {
+        Time.timeScale = 1f;
+        GameStats.Instance.runTutorial = false;
+        SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
     }
 
     //Load Options
