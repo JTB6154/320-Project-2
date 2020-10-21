@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Info Window
   m_EditorClassIdentifier: 
   text:
-  - This area wil lshow you info about the troop you are currently hovering over.
-    It works from troops in both your inventory and the shop.
+  - 'This area will show you info about the troop you are currently hovering over. '

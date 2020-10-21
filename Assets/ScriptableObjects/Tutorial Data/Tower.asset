@@ -13,11 +13,8 @@ MonoBehaviour:
   m_Name: Tower
   m_EditorClassIdentifier: 
   text:
-  - Towers are essensital, as they are where you put your troops into. You need to
-    have a troop put put troops into, or else the troops can't shoot.
-  - 'Click here to start buying a tower. If you have enough gold, a tower image will
-    appear. '
-  - Placing it anywhere valid will place the tower, and charge you the gold.
-  - After placing a tower, click on a troop in your inventory to highlight it. Then,
-    click on the tower you want the troop to go into.
+  - Towers are essential. Troops placed in a tower target and shoot the enemies.
+  - 'Click here to start buying a tower. '
+  - You can place it anywhere on the grass.
+  - Click on a troop and then on a tower to place it.
   - This will place the troop into the tower so it can start firing.
