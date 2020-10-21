@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 scale = new Vector3(0.5f, 0.5f, 1f);
+        Vector3 scale = new Vector3(1.0f, 1.0f, 1f);
         transform.localScale = scale;
     }
 
@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
     {
         if (target != null && target.GetComponent<Enemy>().CurrentHealth>0)
         {
-            this.transform.position += (0.02f * (target.transform.position - this.transform.position));
+            this.transform.position += (0.05f * (target.transform.position - this.transform.position));
             if (target.GetComponent<Enemy>().CurrentHealth > 0)
             {
                 if (AABBCollision(gameObject, target))
