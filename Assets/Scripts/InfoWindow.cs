@@ -23,6 +23,13 @@ public class InfoWindow : MonoBehaviour
         instance = this;
     }
 
+    
+    public void Start()
+    {
+        gameObject.SetActive(false);
+    }
+    
+
     public void UpdateInfo(TroopPlaceholder troop)
     {
         gameObject.SetActive(true);

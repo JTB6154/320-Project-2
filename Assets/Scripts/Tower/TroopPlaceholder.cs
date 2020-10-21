@@ -12,6 +12,13 @@ public class TroopPlaceholder
         this.data = data;
     }
 
+    public int MaxTier
+    {
+        get
+        {
+            return data.MaxTier;
+        }
+    }
     public string TroopName
     {
         get

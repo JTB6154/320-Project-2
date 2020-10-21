@@ -12,6 +12,7 @@ public class TroopData : ScriptableObject
 
     // Combat Stats
     public int Cost;
+    public int MaxTier = 3;
     public float[] AttackSpeed = new float[3];
     public float[] Damage = new float[3];
     public float[] Range = new float[3];
