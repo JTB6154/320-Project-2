@@ -195,26 +195,29 @@ public class Inventory : MonoBehaviour
         if (highlightedIndex == -1) return;
 
         TroopPlaceholder temp = PopHighlightedTroop();
-        List<int> sameTypeIndex = new List<int>();
-        for(int i=0; i < inventory.Length; i++)
-        {
-            if (inventory[i] == null) continue;
 
-            if (inventory[i].data.TowerType == temp.data.TowerType && inventory[i].tier == temp.tier)
+        if (temp.tier < temp.MaxTier)
+        {
+            List<int> sameTypeIndex = new List<int>();
+            for (int i = 0; i < inventory.Length; i++)
             {
-                sameTypeIndex.Add(i);
+                if (inventory[i] == null) continue;
+
+                if (inventory[i].data.TowerType == temp.data.TowerType && inventory[i].tier == temp.tier)
+                {
+                    sameTypeIndex.Add(i);
+                }
+            }
+
+            if (sameTypeIndex.Count > 1)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    RemoveAtIndex(sameTypeIndex[i]);
+                }
+                temp.TierUp();
             }
         }
-
-        if (sameTypeIndex.Count > 1)
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                RemoveAtIndex(sameTypeIndex[i]);
-            }
-            temp.TierUp();
-        }
-
         AddTroop(temp);
     }
     #endregion

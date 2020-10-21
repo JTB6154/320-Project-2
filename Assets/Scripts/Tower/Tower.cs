@@ -26,7 +26,7 @@ public class Tower : MonoBehaviour
     void Start()
     {
         towerManager = GameObject.Find("TowerManager");
-        projectile = towerManager.GetComponent<TowerManager>().projectile;
+        projectile = towerManager.GetComponent<TowerManager>().projectiles[0];
         enemyQueue = enemyQueueHolder.GetComponent<QueueHolder>();
         gameObjectsQueue = new List<GameObject>();
         selfRenderer = GetComponent<SpriteRenderer>();
@@ -35,7 +35,21 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
-        projectile = towerManager.GetComponent<TowerManager>().projectile;
+        if (troop != null)
+        {
+            if (troop.TroopName == "Wizard")
+            {
+                projectile = towerManager.GetComponent<TowerManager>().projectiles[0];
+            }
+            else if (troop.TroopName == "Archer")
+            {
+                projectile = towerManager.GetComponent<TowerManager>().projectiles[1];
+            }
+            else
+            {
+                projectile = towerManager.GetComponent<TowerManager>().projectiles[2];
+            }
+        }
         if (!isUnitAssigned) return;
         timer += Time.deltaTime;
         waitTime = 1 / troop.AttackSpeed;
