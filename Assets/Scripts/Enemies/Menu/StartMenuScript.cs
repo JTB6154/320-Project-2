@@ -9,7 +9,7 @@ public class StartMenuScript : MonoBehaviour
     public void LoadGameScene(string SceneName)
     {
         Time.timeScale = 1f;
-        GameStats.runTutorial = true;
+        GameStats.Instance.runTutorial = true;
         SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
     }
 
