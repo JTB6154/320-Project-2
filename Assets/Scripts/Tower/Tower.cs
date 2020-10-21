@@ -9,6 +9,10 @@ public class Tower : MonoBehaviour
     public bool isUnitAssigned;
     public GameObject enemyQueueHolder;
     public QueueHolder enemyQueue;
+    public List<GameObject> projectiles;
+    public GameObject projectile;
+    public GameObject towerManager;
+
     public float timer = 0.0f;
     public float waitTime = 0.0f;
 
@@ -21,16 +25,18 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
+        towerManager = GameObject.Find("TowerManager");
+        projectile = towerManager.GetComponent<TowerManager>().projectile;
         enemyQueue = enemyQueueHolder.GetComponent<QueueHolder>();
-        gameObjectsQueue=new List<GameObject>();
+        gameObjectsQueue = new List<GameObject>();
         selfRenderer = GetComponent<SpriteRenderer>();
         emptyTower = selfRenderer.sprite;
     }
 
     void Update()
     {
+        projectile = towerManager.GetComponent<TowerManager>().projectile;
         if (!isUnitAssigned) return;
-
         timer += Time.deltaTime;
         waitTime = 1 / troop.AttackSpeed;
         if (timer > waitTime)
@@ -38,6 +44,7 @@ public class Tower : MonoBehaviour
             timer -= waitTime;
             FindAndShootTarget();
         }
+
     }
 
     public void AssignUnit(TroopPlaceholder troop)
@@ -56,7 +63,7 @@ public class Tower : MonoBehaviour
         troop = null;
         selfRenderer.sprite = emptyTower;
         return temp;
-        
+
     }
 
     public void FindAndShootTarget()
@@ -83,7 +90,7 @@ public class Tower : MonoBehaviour
                     enemySprite = x.GetComponent<SpriteRenderer>();
                     float newCenterDistance = Mathf.Pow(Mathf.Pow(enemySprite.bounds.center.x - selfRenderer.bounds.center.x, 2f) +
                         Mathf.Pow(enemySprite.bounds.center.y - selfRenderer.bounds.center.y, 2f), 0.5f);
-                    if (newCenterDistance < troop.Range && x.GetComponent<Enemy>().CurrentHealth>0) //Change to is alive later
+                    if (newCenterDistance < troop.Range && x.GetComponent<Enemy>().CurrentHealth > 0) //Change to is alive later
                     {
                         target = x;
                         shooting = true;
@@ -115,7 +122,11 @@ public class Tower : MonoBehaviour
         }
         if (shooting == true && target != null)
         {
-            target.GetComponent<Enemy>().TakeDamage(troop.Damage);
+            projectile = Instantiate(projectile, gameObject.transform.position, Quaternion.identity);
+            Debug.Log(projectile);
+            projectile.GetComponent<Projectile>().SetTarget(target, troop.Damage);
+            projectiles.Add(projectile);
         }
     }
+
 }
