@@ -7,7 +7,9 @@ using UnityEngine;
 public enum EnemyType { 
     none, // To create a break in the spawn wave
     ranged,
-    melee };
+    melee,
+    dragon
+    };
 
 public class EnemySpawnManager : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     public GameObject ranged;
     public GameObject melee;
+    public GameObject dragon;
 
     public float DistanceToEnd;
 
@@ -170,7 +173,7 @@ public class EnemySpawnManager : MonoBehaviour
             spawnDelta = float.Parse(currentWave[0]);
             spawnDeltaRemaining = spawnDelta;
 
-            print(spawnDelta);
+            //print(spawnDelta);
 
             // Populate the spawnQueue
             for (int i = 1; i < currentWave.Length; i++)
@@ -209,6 +212,8 @@ public class EnemySpawnManager : MonoBehaviour
                 enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
                 enemy.GetComponent<FollowPath>().Path = Path;
                 enemy.GetComponent<Enemy>().manager = GetComponent<EnemySpawnManager>();
+                if (spawnQueue.Count == 0)
+                    enemy.GetComponent<Enemy>().Value += (int)(20.0 + (float)currentWaveNumber * (((float)currentWaveNumber - 3.0) / 15.0 + 5.0));
                 queueHolder.objectQueue.Add(enemy);
                 break;
             case EnemyType.ranged:
@@ -216,6 +221,17 @@ public class EnemySpawnManager : MonoBehaviour
                 enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
                 enemy.GetComponent<FollowPath>().Path = Path;
                 enemy.GetComponent<Enemy>().manager = GetComponent<EnemySpawnManager>();
+                if (spawnQueue.Count == 0)
+                    enemy.GetComponent<Enemy>().Value += (int)(20.0 + (float)currentWaveNumber * (((float)currentWaveNumber - 3.0) / 15.0 + 5.0));
+                queueHolder.objectQueue.Add(enemy);
+                break;
+            case EnemyType.dragon:
+                enemy = Instantiate(dragon, Path[0].transform.position, Quaternion.identity);
+                enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
+                enemy.GetComponent<FollowPath>().Path = Path;
+                enemy.GetComponent<Enemy>().manager = GetComponent<EnemySpawnManager>();
+                if (spawnQueue.Count == 0)
+                    enemy.GetComponent<Enemy>().Value += (int)(20.0 + (float)currentWaveNumber * (((float)currentWaveNumber - 3.0) / 15.0));
                 queueHolder.objectQueue.Add(enemy);
                 break;
             case EnemyType.none:
@@ -225,6 +241,11 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Plays an audio clip
+    /// </summary>
+    /// <param name="clip">The clip to play</param>
+    /// <param name="volume">The relative volume to play it at</param>
     public void playSound(AudioClip clip, float volume)
     {
         audioSource.PlayOneShot(clip, volume);

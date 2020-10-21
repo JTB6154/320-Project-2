@@ -60,12 +60,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7cd90c9241578c40bd767a70f79ff29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 25
+  MaxHealth: 20
   CurrentHealth: 0
   Damage: 1
   AttackSpeed: 0.5
-  Value: 5
+  Value: 1
   IsRanged: 1
+  manager: {fileID: 0}
   source: {fileID: 0}
   attackNoise: {fileID: 8300000, guid: c8c1580b7778b674d98730142ca73ebc, type: 3}
   deathNoise: {fileID: 8300000, guid: d2484718f28d20c4e952c4b6dec34b41, type: 3}

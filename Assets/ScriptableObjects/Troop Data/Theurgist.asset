@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Theurgist
   m_EditorClassIdentifier: 
   TroopName: Theurgist
-  Description: 'ORA ORA ORA ORA ORA ORA ORA ORA ORA ORA ORA '
-  Cost: 10
+  Description: Good All-Around Troop With Short Range
+  Cost: 25
   AttackSpeed:
   - 2
-  - 3
   - 4
+  - 5
   Damage:
-  - 10
-  - 15
   - 20
+  - 35
+  - 45
   Range:
-  - 100
-  - 100
+  - 50
+  - 80
   - 100
   TowerType: 3
   ShopPortrait: {fileID: 21300000, guid: 4895fcf8b18abb8489adb8381a276b4e, type: 3}

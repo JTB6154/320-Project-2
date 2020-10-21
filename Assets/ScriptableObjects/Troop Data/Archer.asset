@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: Archer
   m_EditorClassIdentifier: 
   TroopName: Archer
-  Description: Shoots arrows.
+  Description: Shoots Arrows Very Quickly and Very Far
   Cost: 10
   AttackSpeed:
-  - 2
-  - 3
-  - 4
-  Damage:
+  - 5
+  - 7.5
   - 10
-  - 15
-  - 20
+  Damage:
+  - 2
+  - 5
+  - 10
   Range:
   - 100
-  - 100
-  - 100
+  - 150
+  - 200
   TowerType: 1
   ShopPortrait: {fileID: 21300000, guid: da37f2e0bc62cf244be6b10400112e11, type: 3}
   InventorySprite: {fileID: 21300000, guid: da37f2e0bc62cf244be6b10400112e11, type: 3}
