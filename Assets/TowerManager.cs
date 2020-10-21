@@ -15,7 +15,7 @@ public class TowerManager : MonoBehaviour
 	[SerializeField] GameObject emptyTower;
 	[SerializeField] LayerMask towerFreeZone;
 	GameObject floatingTower;
-	public GameObject projectile;
+	public List<GameObject> projectiles;
 	[SerializeField] TextMeshProUGUI TowerPurchaseButtonText;
 	[SerializeField] GameObject EnemyManager;
 
