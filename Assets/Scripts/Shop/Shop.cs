@@ -14,7 +14,7 @@ public class Shop : MonoBehaviour
     {
         Debug.Log("Shop Start Begin");
         currentShop = new TowerType[5];// { TowerType.None, TowerType.None, TowerType.None, TowerType.None, TowerType.None };
-        RefreshShopIrregular(1);
+        TutorialShop();
         Debug.Log("Shop Start Done");
     }
 
@@ -40,7 +40,7 @@ public class Shop : MonoBehaviour
     {
         // Basic random refresh
         int numTowers = GameStats.Instance.GetNumTowers();
-        // Get a random tower, 5 times
+        // Get a random tower, but only putting on it for amount times
         for (int i = 0; i < 5; i++)
         {
             if (i < amount)
@@ -56,6 +56,22 @@ public class Shop : MonoBehaviour
             }
         }
 
+        uiManager.UpdateShopUI(this);
+    }
+
+    public void TutorialShop() 
+    {
+        // Basic random refresh
+        //int numTowers = GameStats.Instance.GetNumTowers();
+        // Get a random tower, but only putting on it for amount times
+        for (int i = 0; i < 5; i++)
+        {
+            uiManager.towerButtons[i].SetActive(false);
+
+        }
+        //TowerType newTower = (TowerType)Random.Range(1, numTowers + 1);
+        currentShop[0] = TowerType.Archer;
+        uiManager.towerButtons[0].SetActive(true);
         uiManager.UpdateShopUI(this);
     }
 

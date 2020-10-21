@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 137e9f25b4a09aa418553f37cc589d18, type: 3}
+  m_Name: Combine
+  m_EditorClassIdentifier: 
+  text:
+  - After highlighted a troop in your inventory by clicking on it, you can click
+    on this button to combine 3 troops of the same type and tier into a troop of
+    the same type, but a tier up.
+  - The higher a troops's  tier, the more powerful it is. Tiers go up to tier 3.
