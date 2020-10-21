@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
-    public bool runTutorial = true;
     public List<GameObject> popups;
     public List<TutorialData> sections;
 
@@ -18,7 +17,7 @@ public class TutorialManager : MonoBehaviour
         {
             popups[i].SetActive(false);
         }
-        if (popups != null && runTutorial)
+        if (popups != null && GameStats.Instance.runTutorial)
         {
             popups[0].SetActive(true);
             UpdatePopup();

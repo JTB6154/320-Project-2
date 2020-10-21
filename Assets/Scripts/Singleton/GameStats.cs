@@ -20,6 +20,7 @@ public class GameStats : Singleton<GameStats>
 	[SerializeField]
 	private TowerDataPair[] towerDataPairs;
 
+	public bool runTutorial = true;
 	public Dictionary<TowerType, TroopData> TroopBaseData = new Dictionary<TowerType, TroopData>();
 	int numTotalTowers;
 	//public Dictionary<TowerType, int> Costs = new Dictionary<TowerType, int>();
