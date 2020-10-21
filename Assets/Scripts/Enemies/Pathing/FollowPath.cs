@@ -25,6 +25,10 @@ public class FollowPath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float health = gameObject.GetComponent<Enemy>().CurrentHealth;
+        float maxHealth = gameObject.GetComponent<Enemy>().MaxHealth;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, health / maxHealth, health/maxHealth , 1);
+
         if (!hasReachedLast) // Movement
         {
             MoveDirectly();
