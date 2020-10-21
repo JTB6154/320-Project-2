@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Next Wave
   m_EditorClassIdentifier: 
   text:
-  - Clicking the "Next Wave" button will start the next wave of enemies coming at
-    you. It will also refresh the shop.
+  - 'Clicking the "Next Wave" button will start the next wave of enemies coming at
+    you. '

@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text:
   - This area to the right is the shop, and there is currently an archer in the shop.
-  - You can see that this Archer costs 10 gold to buy, because of the 10 next to
-    it's name.
-  - The shop can be refreshed the 5 new troops by paying 5 gold. It also refreshes
-    once at the beginning of each new wave.
+  - The number next to the Archer indicates its cost.
+  - The shop can be refreshed by paying 5 gold. It also refreshes once at the beginning
+    of each new wave.

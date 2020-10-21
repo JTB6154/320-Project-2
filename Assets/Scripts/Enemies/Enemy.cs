@@ -14,18 +14,23 @@ public class Enemy : MonoBehaviour
     public int Value = 5;
 
     public bool IsRanged = false;
+    public EnemySpawnManager manager;
+    [SerializeField] protected AudioSource source;
+    [SerializeField] protected AudioClip attackNoise;
+    [SerializeField] protected AudioClip deathNoise;
 
-    public void Start()
+    public virtual void Start()
     {
         CurrentHealth = MaxHealth;
         gameObject.GetComponent<FollowPath>().IsRanged = IsRanged;
+        source = GetComponent<AudioSource>();
     }
 
     /// <summary>
     /// Subtracts a value of damage from the enemy's health
     /// </summary>
     /// <param name="deltaHealth">The amount of damage to take</param>
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
 
@@ -38,7 +43,7 @@ public class Enemy : MonoBehaviour
     /// Adds a value of healing to the enemy's health
     /// </summary>
     /// <param name="healing">The amount of healing to add</param>
-    public void HealHealth(float healing)
+    public virtual void HealHealth(float healing)
     {
         CurrentHealth += healing;
 
@@ -49,19 +54,27 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Attacks the player health
     /// </summary>
-    public void Attack()
+    public virtual void Attack()
     {
         GameStats.Instance.SubtractHealth(Damage);
         print(GameStats.Instance.GetPlayerHealth());
+
+        // Play audio
+        manager.playSound(attackNoise, 0.25f);
+
         // Do animation too
     }
 
     /// <summary>
     /// Gives the player the value of the unit into their 
     /// </summary>
-    public void Die()
+    public virtual void Die()
     {
         GameStats.Instance.AddGold(Value);
+
+        // Play audio
+        manager.playSound(deathNoise, 1.0f);
+
         gameObject.SetActive(false);
     }
 }
