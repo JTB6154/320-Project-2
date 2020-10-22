@@ -41,13 +41,17 @@ public class GameStats : Singleton<GameStats>
 		//only initialize if we haven't been before
 		if (hasBeenInitialized) return;
 		//initialize any arrays or dictionaries in the Singleton
-
+		TroopBaseData = new Dictionary<TowerType, TroopData>();
 		// Initialize the BaseData Dict
 		foreach(TowerDataPair tdp in towerDataPairs)
         {
 			TroopBaseData.Add(tdp.type, tdp.data);
         }
 		numTotalTowers = towerDataPairs.Length;
+
+		numTowersPurchased = 0;
+		playerCash = 100;
+		towerCostIncrease = 5;
 
 		//set player health to the players max health
 		playerHealth = playerMaxHealth;

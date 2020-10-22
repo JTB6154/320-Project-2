@@ -8,6 +8,7 @@ public class PauseMenuButtonScript : MonoBehaviour
     public void LoadGameScene(string SceneName)
     {
         Time.timeScale = 0f;
+        GameStats.Instance.ReInitialize();
         SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
     }
 
