@@ -87,6 +87,11 @@ public class GameStats : Singleton<GameStats>
 		return playerHealth;
 	}
 
+	public float GetPlayerHealthPercent()
+    {
+		return (float)playerHealth / (float)playerMaxHealth;
+    }
+
 	public CursorState GetCursorState()
 	{ 
 		return state; 
