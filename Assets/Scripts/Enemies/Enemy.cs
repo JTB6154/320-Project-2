@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
         print(GameStats.Instance.GetPlayerHealth());
 
         // Play audio
-        manager.playSound(attackNoise, 0.25f);
+        manager.playSoundNoOverlap(attackNoise, 0.25f);
 
         // Do animation too
     }

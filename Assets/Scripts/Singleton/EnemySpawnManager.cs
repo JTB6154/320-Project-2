@@ -275,4 +275,11 @@ public class EnemySpawnManager : MonoBehaviour
     {
         audioSource.PlayOneShot(clip, volume);
     }
+
+    public void playSoundNoOverlap(AudioClip clip, float volume)
+    {
+        audioSource.clip = clip;
+        audioSource.volume = volume;
+        audioSource.Play();
+    }
 }

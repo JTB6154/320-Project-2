@@ -71,7 +71,7 @@ public class TowerManager : MonoBehaviour
 	private void UpdateBuyingTower()
 	{
 		Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-		floatingTower.transform.position = new Vector3(mousePos.x, mousePos.y, 0);
+		floatingTower.transform.position = new Vector3(mousePos.x, mousePos.y, 0 + mousePos.y / 10f);
 		RaycastHit2D hit = Physics2D.BoxCast(new Vector2(mousePos.x, mousePos.y), floatingTower.GetComponent<BoxCollider2D>().size, 0, Vector2.zero,0, towerFreeZone);
 		if (hit)
 		{
