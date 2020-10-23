@@ -61,7 +61,17 @@ public class Inventory : MonoBehaviour
     {
         highlightedIndex = itemIndex;
 
-    } 
+    }
+
+    public TroopPlaceholder GetHighlightedUnit()
+    {
+        if (highlightedIndex != -1)
+        {
+            TroopPlaceholder toReturn = inventory[highlightedIndex];
+            return toReturn;
+        }
+        return null;
+    }
 
     public void SetHighlightedUnit(int troopIndex)
     {
