@@ -40,6 +40,7 @@ public class EnemySpawnManager : MonoBehaviour
     private AudioSource audioSource;
 
     [SerializeField] private Button nextWaveButton;
+    [SerializeField] private GameObject shop;
 
     private enum SpawnState{
         paused,
@@ -217,6 +218,9 @@ public class EnemySpawnManager : MonoBehaviour
 
             // Change the button back to interactable
             nextWaveButton.interactable = true;
+
+            // Refresh shop offerings
+            shop.GetComponent<Shop>().RefreshShop();
 
             spawnState = SpawnState.paused;
             return;
