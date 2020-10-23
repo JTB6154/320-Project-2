@@ -15,6 +15,7 @@ MonoBehaviour:
   TroopName: Wizard
   Description: High-Damage Slow-Firing Troop
   Cost: 50
+  MaxTier: 3
   AttackSpeed:
   - 1
   - 2
@@ -28,6 +29,6 @@ MonoBehaviour:
   - 100
   - 130
   TowerType: 2
-  ShopPortrait: {fileID: 21300000, guid: 87c5315355bb79d4db5950ea1cae26a4, type: 3}
-  InventorySprite: {fileID: 21300000, guid: 87c5315355bb79d4db5950ea1cae26a4, type: 3}
+  ShopPortrait: {fileID: 21300000, guid: a6ce4b4dcf932be43a3e4985c9f52eab, type: 3}
+  InventorySprite: {fileID: 21300000, guid: 239a3ea497e56b74b9c2257870f3b73e, type: 3}
   BattlefieldSprite: {fileID: 21300000, guid: 98b3c43fef842cd4299d3f9f103769e3, type: 3}

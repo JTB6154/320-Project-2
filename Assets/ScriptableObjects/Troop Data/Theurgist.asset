@@ -15,6 +15,7 @@ MonoBehaviour:
   TroopName: Theurgist
   Description: Good All-Around Troop With Short Range
   Cost: 25
+  MaxTier: 3
   AttackSpeed:
   - 2
   - 4
@@ -28,6 +29,6 @@ MonoBehaviour:
   - 80
   - 100
   TowerType: 3
-  ShopPortrait: {fileID: 21300000, guid: 4895fcf8b18abb8489adb8381a276b4e, type: 3}
-  InventorySprite: {fileID: 21300000, guid: 4895fcf8b18abb8489adb8381a276b4e, type: 3}
+  ShopPortrait: {fileID: 21300000, guid: 9a52e88885cb72e4c9a976b5da7e168e, type: 3}
+  InventorySprite: {fileID: 21300000, guid: 0b7e9d904232fe64f973b43a8da766d6, type: 3}
   BattlefieldSprite: {fileID: 21300000, guid: 75737450f60b05b4a9b80e812ca9761c, type: 3}
