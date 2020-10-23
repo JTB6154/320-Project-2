@@ -4277,6 +4277,11 @@ MonoBehaviour:
   - {fileID: 7125550889233284290, guid: 9a33f7b3b94eb544285d0fc619029f0d, type: 3}
   TowerPurchaseButtonText: {fileID: 1302446721}
   EnemyManager: {fileID: 723920094}
+  barDisplay: 0
+  pos: {x: 200, y: 500}
+  size: {x: 600, y: 20}
+  emptyTex: {fileID: 0}
+  fullTex: {fileID: 0}
 --- !u!4 &762560511
 Transform:
   m_ObjectHideFlags: 0
@@ -5032,7 +5037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1039263787
 Transform:
   m_ObjectHideFlags: 0
