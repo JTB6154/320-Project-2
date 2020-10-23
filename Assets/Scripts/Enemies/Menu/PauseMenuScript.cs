@@ -6,6 +6,7 @@ public class PauseMenuScript : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
     [SerializeField] private bool isPaused;
+    public GameObject userInterface;
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -25,12 +26,14 @@ public class PauseMenuScript : MonoBehaviour
 
     void ActivateMenu()
     {
+        userInterface.SetActive(false);
         Time.timeScale = 0;
         pauseMenuUI.SetActive(true);
     }
 
     public void DeactivateMenu()
     {
+        userInterface.SetActive(true);
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
         isPaused = false;
