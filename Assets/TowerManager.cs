@@ -18,7 +18,7 @@ public class TowerManager : MonoBehaviour
 	public List<GameObject> projectiles;
 	[SerializeField] TextMeshProUGUI TowerPurchaseButtonText;
 	[SerializeField] GameObject EnemyManager;
-
+	public GameObject ringObject;
 
 	private void Start()
 	{
@@ -27,6 +27,7 @@ public class TowerManager : MonoBehaviour
 
 	private void Update()
 	{
+		ShowRangeOnHover();
 		if (GameStats.Instance.GetCursorState() == CursorState.Free)
 		{
 			if (Input.GetMouseButtonDown(0))
@@ -39,6 +40,33 @@ public class TowerManager : MonoBehaviour
 			UpdateBuyingTower();
 		}
 
+	}
+
+	private void ShowRangeOnHover()
+	{
+		TroopPlaceholder temp = inventory.GetHighlightedUnit();
+		if (temp != null)
+		{
+			Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+			RaycastHit2D hit = Physics2D.Raycast(new Vector2(mousePos.x, mousePos.y), Vector2.zero, 0, TowerLayers);
+			if (hit)
+			{
+				Vector3 center = hit.collider.gameObject.transform.position - new Vector3(0, 0.1f, 0);
+				Debug.Log(center);
+				ringObject.GetComponent<Renderer>().enabled = true;
+				ringObject.transform.localScale = new Vector3(temp.Range * 2, temp.Range * 2, 0);
+				ringObject.transform.position = center;
+				Debug.Log(temp.Range);
+			}
+			else
+			{
+				ringObject.GetComponent<Renderer>().enabled = false;
+			}
+		}
+		else
+		{
+			ringObject.GetComponent<Renderer>().enabled = false;
+		}
 	}
 
 	private void CheckTowerAssignment()
