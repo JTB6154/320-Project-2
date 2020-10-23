@@ -167,6 +167,8 @@ public class EnemySpawnManager : MonoBehaviour
 
         if (WaveNumber <= waveData.Count) // Curated Mode
         {
+            nextWaveButton.interactable = false;
+
             // Clear the spawnQueue
             spawnQueue.Clear();
             queueHolder.ClearAll();
@@ -274,5 +276,12 @@ public class EnemySpawnManager : MonoBehaviour
     public void playSound(AudioClip clip, float volume)
     {
         audioSource.PlayOneShot(clip, volume);
+    }
+
+    public void playSoundNoOverlap(AudioClip clip, float volume)
+    {
+        audioSource.clip = clip;
+        audioSource.volume = volume;
+        audioSource.Play();
     }
 }

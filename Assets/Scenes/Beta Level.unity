@@ -4189,6 +4189,8 @@ MonoBehaviour:
   melee: {fileID: 5345080419712204314, guid: f041dc18630030f41b43e8dd350fe505, type: 3}
   dragon: {fileID: 648294915146406472, guid: 5182e8667574f8e44bd699c7615de8b2, type: 3}
   DistanceToEnd: 0
+  nextWaveButton: {fileID: 574329700}
+  shop: {fileID: 255772065}
 --- !u!4 &723920097
 Transform:
   m_ObjectHideFlags: 0
@@ -4655,7 +4657,6 @@ GameObject:
   - component: {fileID: 903342224}
   - component: {fileID: 903342227}
   - component: {fileID: 903342226}
-  - component: {fileID: 903342225}
   m_Layer: 5
   m_Name: Info Window Backing
   m_TagString: Untagged
@@ -4682,25 +4683,6 @@ RectTransform:
   m_AnchoredPosition: {x: -145.1, y: -586}
   m_SizeDelta: {x: 250, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &903342225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 903342223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fdecf5c65317614c915c2be873422ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  portrait: {fileID: 0}
-  nameText: {fileID: 0}
-  descriptionText: {fileID: 0}
-  tierText: {fileID: 0}
-  rangeValueText: {fileID: 0}
-  damageValueText: {fileID: 0}
-  asValueText: {fileID: 0}
 --- !u!114 &903342226
 MonoBehaviour:
   m_ObjectHideFlags: 0
