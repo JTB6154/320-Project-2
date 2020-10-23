@@ -37,6 +37,9 @@ public class EnemySpawnManager : MonoBehaviour
     private int currentWaveNumber;
     private AudioSource audioSource;
 
+    [SerializeField] private Button nextWaveButton;
+    [SerializeField] private GameObject shop;
+
     private enum SpawnState{
         paused,
         spawning
@@ -198,6 +201,27 @@ public class EnemySpawnManager : MonoBehaviour
         // Break once the spawn queue is empty
         if(spawnQueue.Count == 0)
         {
+            for (int i = 0; i < queueHolder.objectQueue.Count; i++)
+            {
+                if (queueHolder.objectQueue[i].activeSelf)
+                    return;
+            }
+
+
+            // Give end of round bonus gold and set variables to default values
+            int endOfRoundBonus = (int)(20.0 + (float)currentWaveNumber * (((float)currentWaveNumber - 3.0) / 15.0 + 5.0));
+            GameStats.Instance.AddGold(endOfRoundBonus);
+
+            // Clear the spawnQueue
+            spawnQueue.Clear();
+            queueHolder.ClearAll();
+
+            // Change the button back to interactable
+            nextWaveButton.interactable = true;
+
+            // Refresh shop offerings
+            shop.GetComponent<Shop>().RefreshShop();
+
             spawnState = SpawnState.paused;
             return;
         }

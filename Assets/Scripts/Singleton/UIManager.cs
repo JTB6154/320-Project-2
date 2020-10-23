@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI goldText;
+    public Slider healthbar;
     public GameObject[] towerButtons;
 
 
@@ -21,6 +22,8 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         goldText.text = GameStats.Instance.GetPlayerGold().ToString();
+
+        healthbar.value = GameStats.Instance.GetPlayerHealthPercent();
     }
 
     public void UpdateShopUI(Shop shop)
