@@ -167,6 +167,8 @@ public class EnemySpawnManager : MonoBehaviour
 
         if (WaveNumber <= waveData.Count) // Curated Mode
         {
+            nextWaveButton.interactable = false;
+
             // Clear the spawnQueue
             spawnQueue.Clear();
             queueHolder.ClearAll();
