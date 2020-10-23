@@ -4079,6 +4079,7 @@ MonoBehaviour:
   melee: {fileID: 5345080419712204314, guid: f041dc18630030f41b43e8dd350fe505, type: 3}
   dragon: {fileID: 648294915146406472, guid: 5182e8667574f8e44bd699c7615de8b2, type: 3}
   DistanceToEnd: 0
+  nextWaveButton: {fileID: 574329700}
 --- !u!4 &723920097
 Transform:
   m_ObjectHideFlags: 0
@@ -4277,6 +4278,11 @@ MonoBehaviour:
   - {fileID: 7125550889233284290, guid: 9a33f7b3b94eb544285d0fc619029f0d, type: 3}
   TowerPurchaseButtonText: {fileID: 1302446721}
   EnemyManager: {fileID: 723920094}
+  barDisplay: 0
+  pos: {x: 200, y: 500}
+  size: {x: 600, y: 20}
+  emptyTex: {fileID: 0}
+  fullTex: {fileID: 0}
 --- !u!4 &762560511
 Transform:
   m_ObjectHideFlags: 0
