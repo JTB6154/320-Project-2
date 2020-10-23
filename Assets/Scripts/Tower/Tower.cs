@@ -22,6 +22,7 @@ public class Tower : MonoBehaviour
     private SpriteRenderer selfRenderer;
     Sprite emptyTower;
     private SpriteRenderer enemySprite;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -31,6 +32,8 @@ public class Tower : MonoBehaviour
         gameObjectsQueue = new List<GameObject>();
         selfRenderer = GetComponent<SpriteRenderer>();
         emptyTower = selfRenderer.sprite;
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -137,6 +140,7 @@ public class Tower : MonoBehaviour
         if (shooting == true && target != null)
         {
             projectile = Instantiate(projectile, gameObject.transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(projectile.GetComponent<AudioSource>().clip, projectile.GetComponent<AudioSource>().volume);
             Debug.Log(projectile);
             projectile.GetComponent<Projectile>().SetTarget(target, troop.Damage);
             projectiles.Add(projectile);

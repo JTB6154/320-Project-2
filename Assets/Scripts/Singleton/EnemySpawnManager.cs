@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
+
 public enum EnemyType { 
     none, // To create a break in the spawn wave
     ranged,
@@ -36,6 +38,8 @@ public class EnemySpawnManager : MonoBehaviour
     private QueueHolder queueHolder;
     private int currentWaveNumber;
     private AudioSource audioSource;
+
+    [SerializeField] private Button nextWaveButton;
 
     private enum SpawnState{
         paused,
@@ -163,11 +167,6 @@ public class EnemySpawnManager : MonoBehaviour
 
         if (WaveNumber <= waveData.Count) // Curated Mode
         {
-            // Clear the spawnQueue
-            spawnQueue.Clear();
-            queueHolder.ClearAll();
-
-
             string[] currentWave = waveData[WaveNumber - 1].Split(' ');
 
             spawnDelta = float.Parse(currentWave[0]);
@@ -195,9 +194,30 @@ public class EnemySpawnManager : MonoBehaviour
     /// </summary>
     private void SpawnEnemy()
     {
+        // Set the button to uninteractable when the wave starts
+        nextWaveButton.interactable = false;
+
         // Break once the spawn queue is empty
         if(spawnQueue.Count == 0)
         {
+            for (int i = 0; i < queueHolder.objectQueue.Count; i++)
+            {
+                if (queueHolder.objectQueue[i].activeSelf)
+                    return;
+            }
+
+
+            // Give end of round bonus gold and set variables to default values
+            int endOfRoundBonus = (int)(20.0 + (float)currentWaveNumber * (((float)currentWaveNumber - 3.0) / 15.0 + 5.0));
+            GameStats.Instance.AddGold(endOfRoundBonus);
+
+            // Clear the spawnQueue
+            spawnQueue.Clear();
+            queueHolder.ClearAll();
+
+            // Change the button back to interactable
+            nextWaveButton.interactable = true;
+
             spawnState = SpawnState.paused;
             return;
         }
@@ -212,8 +232,6 @@ public class EnemySpawnManager : MonoBehaviour
                 enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
                 enemy.GetComponent<FollowPath>().Path = Path;
                 enemy.GetComponent<Enemy>().manager = GetComponent<EnemySpawnManager>();
-                if (spawnQueue.Count == 0)
-                    enemy.GetComponent<Enemy>().Value += (int)(20.0 + (float)currentWaveNumber * (((float)currentWaveNumber - 3.0) / 15.0 + 5.0));
                 queueHolder.objectQueue.Add(enemy);
                 break;
             case EnemyType.ranged:
@@ -221,8 +239,6 @@ public class EnemySpawnManager : MonoBehaviour
                 enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
                 enemy.GetComponent<FollowPath>().Path = Path;
                 enemy.GetComponent<Enemy>().manager = GetComponent<EnemySpawnManager>();
-                if (spawnQueue.Count == 0)
-                    enemy.GetComponent<Enemy>().Value += (int)(20.0 + (float)currentWaveNumber * (((float)currentWaveNumber - 3.0) / 15.0 + 5.0));
                 queueHolder.objectQueue.Add(enemy);
                 break;
             case EnemyType.dragon:
@@ -230,8 +246,6 @@ public class EnemySpawnManager : MonoBehaviour
                 enemy.GetComponent<FollowPath>().DistanceToEnd = DistanceToEnd;
                 enemy.GetComponent<FollowPath>().Path = Path;
                 enemy.GetComponent<Enemy>().manager = GetComponent<EnemySpawnManager>();
-                if (spawnQueue.Count == 0)
-                    enemy.GetComponent<Enemy>().Value += (int)(20.0 + (float)currentWaveNumber * (((float)currentWaveNumber - 3.0) / 15.0));
                 queueHolder.objectQueue.Add(enemy);
                 break;
             case EnemyType.none:
