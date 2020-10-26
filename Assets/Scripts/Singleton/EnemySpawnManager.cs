@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public enum EnemyType { 
     none, // To create a break in the spawn wave
@@ -104,33 +105,17 @@ public class EnemySpawnManager : MonoBehaviour
     /// <returns>True if successful</returns>
     public bool ChangeWaveInfoFile(string FileName)
     {
-        string FilePath = Application.dataPath + "/LevelFiles/" + FileName + ".wif";
+        TextAsset LevelFile = Resources.Load<TextAsset>("LevelFiles/" + FileName);
 
-        // Test to see if the file exists and has data
-        try
+        if (LevelFile.text != null)
         {
-            using (StreamReader reader = new StreamReader(FilePath))
-            {
-                string test;
-
-                if ((test = reader.ReadLine()) != null)
-                {
-                    print(test);
-                    waveInfoFilePath = FilePath;
-                    waveData.Clear();
-                    waveData.Add(test);
-
-                    waveData.AddRange(reader.ReadToEnd().Split('\n'));
-
-                    return true;
-                }
-            }
-                return false;
+            waveData.Clear();
+            waveData.AddRange(LevelFile.text.Split('\n'));
+            waveInfoFilePath = "LevelFiles/" + FileName;
+            return true;
         }
-        catch
-        {
+        else
             return false;
-        }
     }
 
     /// <summary>
@@ -161,10 +146,6 @@ public class EnemySpawnManager : MonoBehaviour
         
         currentWaveNumber = WaveNumber;
 
-        print(WaveNumber);
-        print(waveData.Count);
-        print(waveData);
-
         if (WaveNumber <= waveData.Count) // Curated Mode
         {
             nextWaveButton.interactable = false;
@@ -188,9 +169,9 @@ public class EnemySpawnManager : MonoBehaviour
             }
 
         }
-        else // Endless mode
+        else // Win
         {
-            print("we're in endless now");// TODO: Create algorithm for endless mode spawn determination
+            SceneManager.LoadScene("Win Scene");
         }
 
         spawnState = SpawnState.spawning;
